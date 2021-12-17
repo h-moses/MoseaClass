@@ -85,7 +85,7 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
         Drawable drawable = getDrawable();
         if (null != drawable) {
             Bitmap bitmap = getBitmapFromDrawable(drawable);
-            Bitmap b = getRoundBitmapByShader(bitmap, getWidth(), getHeight(), 50);
+            Bitmap b = getRoundBitmapByShader(bitmap, getWidth(), getHeight(), 15);
             final Rect rectSrc = new Rect(0, 0, b.getWidth(), b.getHeight());
             final Rect rectDest = new Rect(0, 0, getWidth(), getHeight());
             paint.reset();

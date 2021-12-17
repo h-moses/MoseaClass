@@ -5,16 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.hyt.moseaclass.components.BannerView;
+import com.hyt.moseaclass.components.indicator.CircleIndicator;
 import com.hyt.moseaclass.databinding.FragmentTabBinding;
-import com.hyt.moseaclass.databinding.ViewBannerBinding;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 
 import org.json.JSONArray;
@@ -33,6 +31,7 @@ public class TabPageFragment extends Fragment {
     private final Context mContext;
     private FragmentTabBinding binding;
     private int tabTitle;
+    private BannerView bannerView;
 
     public TabPageFragment(Context context, int tabTitle) {
         this.mContext = context;
@@ -49,9 +48,9 @@ public class TabPageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentTabBinding.inflate(inflater, container, false);
-        BannerView bannerView = new BannerView(getContext(),binding.getRoot(), imageUrl);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,220);
-        binding.getRoot().addView(bannerView,params);
+        bannerView = binding.bannerView;
+        bannerView.setIndicator(new CircleIndicator(getContext()));
+        bannerView.setBannerData(imageUrl);
         return binding.getRoot();
     }
 

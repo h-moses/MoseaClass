@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/gray_back"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/padding_horizontal"
-    android:paddingTop="@dimen/padding_horizontal"
     tools:context=".ui.home.TabPageFragment">
 
-
+    <com.hyt.moseaclass.components.BannerView
+        android:id="@+id/banner_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:banner_auto_scroll="true"
+        app:banner_page_margin="16dp"
+        app:banner_radius="15sp"
+        app:banner_toggle_duration="1800" />
 
 </LinearLayout>

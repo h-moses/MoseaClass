@@ -1,7 +1,6 @@
 package com.hyt.moseaclass.utils;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;

@@ -8,5 +8,7 @@
     <string name="tab_foreign_languages">外语</string>
     <string name="tab_postgraduate_exam">2023考研</string>
     <string name="tab_national_excellent">国家精品</string>
+    <string name="tab_psychology">心理学</string>
+    <string name="tab_final_exam">期末不挂</string>
     <string name="banner_desc">轮播图</string>
 </resources>
