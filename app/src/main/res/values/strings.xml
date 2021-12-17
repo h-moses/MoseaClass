@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">山海课堂</string>
+    <string name="title_home">首页</string>
+    <string name="title_course">学习</string>
+    <string name="title_person">我的</string>
+    <string name="tab_recommend">推荐</string>
+    <string name="tab_cs">计算机</string>
+    <string name="tab_foreign_languages">外语</string>
+    <string name="tab_postgraduate_exam">2023考研</string>
+    <string name="tab_national_excellent">国家精品</string>
+    <string name="banner_desc">轮播图</string>
+</resources>
