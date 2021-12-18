@@ -8,19 +8,32 @@
     android:orientation="vertical"
     tools:context=".ui.home.TabPageFragment">
 
-    <com.hyt.moseaclass.components.BannerView
-        android:id="@+id/advertising_banner"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        app:banner_auto_scroll="true"
-        app:banner_page_margin="16dp"
-        app:banner_radius="15sp"
-        app:banner_toggle_duration="1800" />
+        android:layout_height="match_parent" >
 
-    <com.hyt.moseaclass.components.CourseAlbumView
-        android:id="@+id/course_album"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_16" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <com.hyt.moseaclass.components.BannerView
+                android:id="@+id/advertising_banner"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                app:banner_auto_scroll="true"
+                app:banner_page_margin="16dp"
+                app:banner_radius="15sp"
+                app:banner_toggle_duration="1800" />
+
+            <com.hyt.moseaclass.components.CourseAlbumView
+                android:id="@+id/course_album"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

@@ -13,11 +13,18 @@
         android:textColor="@color/black"
         android:textSize="@dimen/sp_18" />
 
-    <GridLayout
-        android:id="@+id/course_grid"
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="4"
-        android:rowCount="2" />
+        android:layout_height="wrap_content" >
+
+        <GridLayout
+            android:id="@+id/course_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alignmentMode="alignBounds"
+            android:columnCount="4"
+            android:rowCount="2" />
+
+    </HorizontalScrollView>
 
 </LinearLayout>

@@ -59,9 +59,6 @@ public class TabPageFragment extends Fragment {
         bannerView = binding.advertisingBanner;
         bannerView.setIndicator(new CircleIndicator(getContext()));
         bannerView.setBannerData(bannerImages);
-//        CourseAlbumView view = new CourseAlbumView(getContext(),courseIntroductions);
-//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-//        binding.getRoot().addView(view, params);
         CourseAlbumView courseAlbum = binding.courseAlbum;
         courseAlbum.setCourseAlbumData(courseIntroductions);
         return binding.getRoot();

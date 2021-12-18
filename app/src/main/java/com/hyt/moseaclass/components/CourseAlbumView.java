@@ -52,6 +52,6 @@ public class CourseAlbumView extends LinearLayout {
     }
 
     public void setCourseAlbumData(List<CourseIntroduction> list) {
-        ViewUtils.initGridLayout(mContext, (ViewGroup) getParent(), courseGrid, 2, 4, list);
+        ViewUtils.initGridLayout(mContext, courseGrid, 2, 4, list);
     }
 }

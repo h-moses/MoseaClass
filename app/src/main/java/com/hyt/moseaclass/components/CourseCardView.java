@@ -12,8 +12,7 @@ import androidx.databinding.ObservableField;
 
 import com.hyt.moseaclass.databinding.ViewCourseCardBinding;
 import com.hyt.moseaclass.model.CourseIntroduction;
-
-import java.util.Objects;
+import com.squareup.picasso.Picasso;
 
 public class CourseCardView extends RelativeLayout {
 
@@ -21,9 +20,8 @@ public class CourseCardView extends RelativeLayout {
 
     private ViewCourseCardBinding binding;
 
-    private ObservableField<CourseIntroduction> introduction;
 
-    public CourseCardView(@NonNull Context context, ViewGroup parent) {
+    public CourseCardView(@NonNull Context context) {
         super(context, null, 0);
         this.mContext = context;
         init();
@@ -41,12 +39,11 @@ public class CourseCardView extends RelativeLayout {
 
     private void init() {
         binding = ViewCourseCardBinding.inflate(LayoutInflater.from(mContext), this, true);
-        this.introduction = new ObservableField<>();
     }
 
     public void setData(String uri, String title, String teacher) {
-        Objects.requireNonNull(introduction.get()).setcImage(uri);
-        Objects.requireNonNull(introduction.get()).setcName(title);
-        Objects.requireNonNull(introduction.get()).setcInstructor(teacher);
+        Picasso.get().load(uri).into(binding.courseImage);
+        binding.courseTitle.setText(title);
+        binding.courseTeacher.setText(teacher);
     }
 }
