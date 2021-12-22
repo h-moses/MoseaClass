@@ -1,5 +1,6 @@
 package com.hyt.moseaclass.ui.home;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.hyt.moseaclass.components.BannerView;
 import com.hyt.moseaclass.components.CourseAlbumView;
@@ -34,22 +36,31 @@ public class TabPageFragment extends Fragment {
     private final List<CourseIntroduction> courseIntroductions = new ArrayList<>();
     private final Context mContext;
     private FragmentTabBinding binding;
-    private int tabTitle;
+    private String tabTitle;
     private BannerView bannerView;
+    private CourseAlbumView courseAlbum;
 
     public TabPageFragment(Context context, int tabTitle) {
         this.mContext = context;
-        this.tabTitle = tabTitle;
+        this.tabTitle = mContext.getResources().getString(tabTitle);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(TAG, "onCreate: " + tabTitle);
         try {
             initData();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e(TAG, "onStart: " + tabTitle);
     }
 
     @Nullable
@@ -58,10 +69,17 @@ public class TabPageFragment extends Fragment {
         binding = FragmentTabBinding.inflate(inflater, container, false);
         bannerView = binding.advertisingBanner;
         bannerView.setIndicator(new CircleIndicator(getContext()));
+        courseAlbum = binding.courseAlbum;
         bannerView.setBannerData(bannerImages);
-        CourseAlbumView courseAlbum = binding.courseAlbum;
         courseAlbum.setCourseAlbumData(courseIntroductions);
+        Log.e(TAG, "onCreateView: " + tabTitle);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: " + tabTitle);
     }
 
     private void initData() throws JSONException {
@@ -79,16 +97,28 @@ public class TabPageFragment extends Fragment {
             int cid = jsonObject.getInt("cid");
             String title = jsonObject.getString("title");
             String cover = jsonObject.getString("cover");
+            String desc = jsonObject.getString("des");
             String string = jsonObject.getJSONObject("user").getString("nick_name");
-            CourseIntroduction introduction = new CourseIntroduction(cid, title, cover, string);
-            Log.e(TAG, "initData: " + introduction.toString());
+            CourseIntroduction introduction = new CourseIntroduction(cid, title, cover, string, desc);
             courseIntroductions.add(introduction);
         }
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        Log.e(TAG, "onPause: " + tabTitle);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.e(TAG, "onStop: " + tabTitle);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
-        binding.advertisingBanner.stopPlay();
+        Log.e(TAG, "onDestroy: " + tabTitle);
     }
 }

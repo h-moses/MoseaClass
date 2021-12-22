@@ -45,6 +45,8 @@ public class HomeFragment extends Fragment {
 
     private void initTabLayout() {
         binding.viewPager.setAdapter(new SectionsPagerAdapter(getContext(), getParentFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
+//        解决tab切换时的轮播图报错
+        binding.viewPager.setOffscreenPageLimit(7);
         binding.homeTabs.setupWithViewPager(binding.viewPager);
     }
 }

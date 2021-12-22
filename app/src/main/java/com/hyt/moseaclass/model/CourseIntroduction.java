@@ -13,18 +13,14 @@ public class CourseIntroduction {
     private String cName;
     private String cImage;
     private String cInstructor;
+    private String cDesc;
 
-    public CourseIntroduction(int cid, String cName, String cImage, String cInstructor) {
+    public CourseIntroduction(int cid, String cName, String cImage, String cInstructor, String desc) {
         this.cid = cid;
         this.cName = cName;
         this.cImage = cImage;
         this.cInstructor = cInstructor;
-    }
-
-    public CourseIntroduction(String cName, String cImage, String cInstructor) {
-        this.cName = cName;
-        this.cImage = cImage;
-        this.cInstructor = cInstructor;
+        this.cDesc = desc;
     }
 
     @BindingAdapter({"imageUrl"})
@@ -62,6 +58,14 @@ public class CourseIntroduction {
 
     public void setcInstructor(String cInstructor) {
         this.cInstructor = cInstructor;
+    }
+
+    public String getcDesc() {
+        return cDesc;
+    }
+
+    public void setcDesc(String cDesc) {
+        this.cDesc = cDesc;
     }
 
     @Override

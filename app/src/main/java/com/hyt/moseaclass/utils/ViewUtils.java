@@ -20,7 +20,7 @@ public class ViewUtils {
         for (int i = 0; i < list.size(); i++) {
             CourseIntroduction introduction = list.get(i);
             CourseCardView courseCardView = new CourseCardView(context);
-            courseCardView.setData(introduction.getcImage(), introduction.getcName(), introduction.getcInstructor());
+            courseCardView.setData(introduction.getCid(), introduction.getcImage(), introduction.getcName(), introduction.getcInstructor(),introduction.getcDesc());
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = GridLayout.LayoutParams.WRAP_CONTENT;
             params.height = GridLayout.LayoutParams.WRAP_CONTENT;

@@ -19,6 +19,8 @@ import com.hyt.moseaclass.components.indicator.BaseIndicator;
 import com.hyt.moseaclass.components.indicator.CircleIndicator;
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -146,7 +148,7 @@ public class BannerView extends FrameLayout {
         try {
             mIsAutoScroll = ta.getBoolean(R.styleable.BannerView_banner_auto_scroll, true);
             mPageMargin = ta.getDimensionPixelSize(R.styleable.BannerView_banner_page_margin, 0);
-            mDelayTime = ta.getInteger(R.styleable.BannerView_banner_toggle_duration, 2000);
+            mDelayTime = ta.getInteger(R.styleable.BannerView_banner_toggle_duration, 3000);
             mBannerRadius = ta.getDimensionPixelSize(R.styleable.BannerView_banner_radius, 0);
             if (mPageMargin > 0) {
                 mIsMargin = true;
@@ -353,8 +355,9 @@ public class BannerView extends FrameLayout {
             return arg0 == arg1;
         }
 
+        @NotNull
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(@NotNull ViewGroup container, int position) {
             CardView cardView = new CardView(getContext());
             cardView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             cardView.setCardElevation(5);
@@ -374,12 +377,11 @@ public class BannerView extends FrameLayout {
             Picasso.get().load(mBannerUrlList.get(position)).into(bannerIv);
             cardView.addView(bannerIv);
             container.addView(cardView);
-            //bannerIv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             return cardView;
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NotNull ViewGroup container, int position, @NotNull Object object) {
 
         }
     }

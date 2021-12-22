@@ -41,7 +41,8 @@
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@color/blue_primary"
             app:tabIndicatorFullWidth="false"
-            app:tabMode="scrollable"
+            app:tabGravity="center"
+            app:tabMode="auto"
             app:tabSelectedTextColor="@color/black"
             app:tabTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
             app:tabTextColor="@color/gray_text" />
