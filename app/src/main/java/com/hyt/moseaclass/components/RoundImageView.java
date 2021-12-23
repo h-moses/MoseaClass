@@ -12,12 +12,15 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 
 public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView {
+
+    private static final String TAG = RoundImageView.class.getSimpleName();
     private final Paint paint;
 
     public RoundImageView(Context context) {
-        this(context, null);
+        this(context, null, 0);
     }
 
     public RoundImageView(Context context, AttributeSet attrs) {
@@ -26,6 +29,7 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
 
     public RoundImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        Log.e(TAG, "RoundImageView: ");
         paint = new Paint();
     }
 

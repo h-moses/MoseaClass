@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.GridLayout;
 
 import com.hyt.moseaclass.components.CourseCardView;
-import com.hyt.moseaclass.model.CourseIntroduction;
+import com.hyt.moseaclass.data.CourseIntroduction;
 
 import java.util.List;
 

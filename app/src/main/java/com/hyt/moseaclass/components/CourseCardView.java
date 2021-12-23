@@ -2,8 +2,6 @@ package com.hyt.moseaclass.components;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +10,8 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.hyt.moseaclass.data.CourseIntroduction;
 import com.hyt.moseaclass.databinding.ViewCourseCardBinding;
-import com.hyt.moseaclass.model.CourseIntroduction;
 import com.hyt.moseaclass.ui.course.CourseIntroductionActivity;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;
@@ -67,10 +65,10 @@ public class CourseCardView extends RelativeLayout implements View.OnClickListen
 //        intent.putExtra("course", bundle);
         SharedPreferenceUtils.clear(getContext());
         SharedPreferenceUtils.setInteger(getContext(), "id", introduction.getCid());
-        SharedPreferenceUtils.setString(getContext(),"name",introduction.getcName());
-        SharedPreferenceUtils.setString(getContext(),"image",introduction.getcImage());
-        SharedPreferenceUtils.setString(getContext(),"teacher",introduction.getcInstructor());
-        SharedPreferenceUtils.setString(getContext(),"desc",introduction.getcDesc());
+        SharedPreferenceUtils.setString(getContext(), "name", introduction.getcName());
+        SharedPreferenceUtils.setString(getContext(), "image", introduction.getcImage());
+        SharedPreferenceUtils.setString(getContext(), "teacher", introduction.getcInstructor());
+        SharedPreferenceUtils.setString(getContext(), "desc", introduction.getcDesc());
         mContext.startActivity(intent);
     }
 }

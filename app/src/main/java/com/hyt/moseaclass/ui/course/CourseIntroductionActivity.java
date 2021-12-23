@@ -18,8 +18,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.hyt.moseaclass.R;
 import com.hyt.moseaclass.adapters.CourseRelativityPagerAdapter;
+import com.hyt.moseaclass.data.CourseIntroduction;
 import com.hyt.moseaclass.databinding.ActivityCourseIntroductionBinding;
-import com.hyt.moseaclass.model.CourseIntroduction;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;
 
@@ -63,7 +63,7 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     private void handleIntent() {
 //        Bundle course = getIntent().getBundleExtra("course");
 //        assert course != null;
-        introduction = new CourseIntroduction(SharedPreferenceUtils.getInteger(this, "id", Integer.MIN_VALUE), SharedPreferenceUtils.getString(this,"name",""), SharedPreferenceUtils.getString(this, "image", ""), SharedPreferenceUtils.getString(this,"teacher", ""), SharedPreferenceUtils.getString(this,"desc",""));
+        introduction = new CourseIntroduction(SharedPreferenceUtils.getInteger(this, "id", Integer.MIN_VALUE), SharedPreferenceUtils.getString(this, "name", ""), SharedPreferenceUtils.getString(this, "image", ""), SharedPreferenceUtils.getString(this, "teacher", ""), SharedPreferenceUtils.getString(this, "desc", ""));
     }
 
     @Override

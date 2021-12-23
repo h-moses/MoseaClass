@@ -14,8 +14,8 @@ import androidx.fragment.app.Fragment;
 import com.hyt.moseaclass.components.BannerView;
 import com.hyt.moseaclass.components.CourseAlbumView;
 import com.hyt.moseaclass.components.indicator.CircleIndicator;
+import com.hyt.moseaclass.data.CourseIntroduction;
 import com.hyt.moseaclass.databinding.FragmentTabBinding;
-import com.hyt.moseaclass.model.CourseIntroduction;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 
 import org.json.JSONArray;

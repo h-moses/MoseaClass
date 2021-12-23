@@ -1,4 +1,4 @@
-package com.hyt.moseaclass.model;
+package com.hyt.moseaclass.data;
 
 public class CourseSection {
 

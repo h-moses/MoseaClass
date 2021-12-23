@@ -1,4 +1,4 @@
-package com.hyt.moseaclass.model;
+package com.hyt.moseaclass.data;
 
 import android.net.Uri;
 import android.widget.ImageView;

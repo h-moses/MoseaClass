@@ -14,9 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.hyt.moseaclass.R;
+import com.hyt.moseaclass.data.CourseChapter;
+import com.hyt.moseaclass.data.CourseSection;
 import com.hyt.moseaclass.databinding.FragmentCoursewareBinding;
-import com.hyt.moseaclass.model.CourseChapter;
-import com.hyt.moseaclass.model.CourseSection;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 
@@ -51,7 +51,7 @@ public class CoursewareFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentCoursewareBinding.inflate(inflater, container, false);
-        binding.coursewareExpandList.setAdapter(new CourseWareAdapter(getContext(),chapterList, sectionList));
+        binding.coursewareExpandList.setAdapter(new CourseWareAdapter(getContext(), chapterList, sectionList));
         return binding.getRoot();
     }
 
@@ -84,11 +84,11 @@ public class CoursewareFragment extends Fragment {
 
     static class CourseWareAdapter implements ExpandableListAdapter {
 
+        private static final String ChapterNameTemplate = "第 %d 章 %s";
+        private static final String SectionNameTemplate = "%d - %d %s";
         private final Context context;
         private final List<CourseChapter> chapterList;
         private final List<List<CourseSection>> sectionList;
-        private static final String ChapterNameTemplate = "第 %d 章 %s";
-        private static final String SectionNameTemplate = "%d - %d %s";
 
         public CourseWareAdapter(Context context, List<CourseChapter> chapterList, List<List<CourseSection>> sectionList) {
             this.context = context;
@@ -152,7 +152,7 @@ public class CoursewareFragment extends Fragment {
             } else {
                 chapterViewHolder = (ChapterViewHolder) convertView.getTag();
             }
-            chapterViewHolder.tv_chapter_name.setText(String.format(Locale.CHINA, ChapterNameTemplate,chapterList.get(groupPosition).getcId(),chapterList.get(groupPosition).getcName()));
+            chapterViewHolder.tv_chapter_name.setText(String.format(Locale.CHINA, ChapterNameTemplate, chapterList.get(groupPosition).getcId(), chapterList.get(groupPosition).getcName()));
             return convertView;
         }
 
@@ -168,7 +168,7 @@ public class CoursewareFragment extends Fragment {
                 sectionViewHolder = (SectionViewHolder) convertView.getTag();
             }
 
-            sectionViewHolder.tv_section_name.setText(String.format(Locale.CHINA,SectionNameTemplate,chapterList.get(groupPosition).getcId(),sectionList.get(groupPosition).get(childPosition).getsOrderId(),sectionList.get(groupPosition).get(childPosition).getsName()));
+            sectionViewHolder.tv_section_name.setText(String.format(Locale.CHINA, SectionNameTemplate, chapterList.get(groupPosition).getcId(), sectionList.get(groupPosition).get(childPosition).getsOrderId(), sectionList.get(groupPosition).get(childPosition).getsName()));
             return convertView;
         }
 
