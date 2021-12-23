@@ -6,20 +6,21 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.hyt.moseaclass.R;
+import com.hyt.moseaclass.adapters.CourseRelativityPagerAdapter;
 import com.hyt.moseaclass.databinding.ActivityCourseIntroductionBinding;
 import com.hyt.moseaclass.model.CourseIntroduction;
+import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -35,7 +36,7 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handleIntent();
-        binding = ActivityCourseIntroductionBinding.inflate(LayoutInflater.from(this), null,false);
+        binding = ActivityCourseIntroductionBinding.inflate(LayoutInflater.from(this), null, false);
         setContentView(binding.getRoot());
         setSupportActionBar(binding.courseToolbar);
         // 设置状态栏覆盖到应用之上，不占固定位置
@@ -48,6 +49,9 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
         stateListAnimator.addState(new int[0], ObjectAnimator.ofFloat(binding.introductionAppbar, "elevation", 0.1f));
         binding.introductionAppbar.setStateListAnimator(stateListAnimator);
 
+        binding.introductionViewpager.setAdapter(new CourseRelativityPagerAdapter(this, getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
+        binding.introductionTabs.setupWithViewPager(binding.introductionViewpager);
+
         Picasso.get().load(Uri.parse(introduction.getcImage())).into(binding.tbExpand.introductionImage);
         binding.tbExpand.introductionName.setText(introduction.getcName());
         binding.tbExpand.introductionDepart.setText(introduction.getcInstructor());
@@ -55,9 +59,9 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     }
 
     private void handleIntent() {
-        Bundle course = getIntent().getBundleExtra("course");
-        assert course != null;
-        introduction = new CourseIntroduction(course.getInt("id"),course.getString("name"),course.getString("image"),course.getString("teacher"),course.getString("desc"));
+//        Bundle course = getIntent().getBundleExtra("course");
+//        assert course != null;
+        introduction = new CourseIntroduction(SharedPreferenceUtils.getInteger(this, "id", Integer.MIN_VALUE), SharedPreferenceUtils.getString(this,"name",""), SharedPreferenceUtils.getString(this, "image", ""), SharedPreferenceUtils.getString(this,"teacher", ""), SharedPreferenceUtils.getString(this,"desc",""));
     }
 
     @Override
@@ -75,13 +79,13 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     }
 
     /*
-    * 根据状态栏的展开折叠修改返回按钮的颜色
-    * */
+     * 根据状态栏的展开折叠修改返回按钮的颜色
+     * */
     private void setCustomNavigationIcon(int color) {
         Drawable upArrow = ContextCompat.getDrawable(this, androidx.appcompat.R.drawable.abc_ic_ab_back_material);
-        if(upArrow != null) {
+        if (upArrow != null) {
             upArrow.setColorFilter(ContextCompat.getColor(this, color), PorterDuff.Mode.SRC_ATOP);
-            if(getSupportActionBar() != null) {
+            if (getSupportActionBar() != null) {
                 getSupportActionBar().setHomeAsUpIndicator(upArrow);
             }
         }

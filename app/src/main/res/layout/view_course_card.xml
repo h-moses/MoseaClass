@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/dp_8"
     android:layout_marginTop="@dimen/dp_5"
+    android:layout_marginEnd="@dimen/dp_8"
     android:clickable="true">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/course_card"
         android:layout_width="140dp"
         android:layout_height="180dp"
-        android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="@dimen/dp_4"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true">
@@ -34,8 +34,8 @@
                 android:id="@+id/course_title"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_marginTop="@dimen/dp_5"
+                android:layout_weight="1"
                 android:maxLines="2"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
@@ -44,8 +44,8 @@
                 android:id="@+id/course_teacher"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_marginStart="@dimen/dp_5"
+                android:layout_weight="1"
                 android:textColor="@color/gray_text"
                 android:textSize="@dimen/sp_14" />
 

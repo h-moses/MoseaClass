@@ -10,5 +10,9 @@
     <string name="tab_national_excellent">国家精品</string>
     <string name="tab_psychology">心理学</string>
     <string name="tab_final_exam">期末不挂</string>
+    <string name="tab_introduction">简介</string>
+    <string name="tab_courseware">课件</string>
+    <string name="tab_comment">评价</string>
+    <string name="tab_discuss">讨论</string>
     <string name="banner_desc">轮播图</string>
 </resources>

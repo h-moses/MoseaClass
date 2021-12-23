@@ -1,8 +1,6 @@
 package com.hyt.moseaclass.utils;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.GridLayout;
 
 import com.hyt.moseaclass.components.CourseCardView;
@@ -20,7 +18,7 @@ public class ViewUtils {
         for (int i = 0; i < list.size(); i++) {
             CourseIntroduction introduction = list.get(i);
             CourseCardView courseCardView = new CourseCardView(context);
-            courseCardView.setData(introduction.getCid(), introduction.getcImage(), introduction.getcName(), introduction.getcInstructor(),introduction.getcDesc());
+            courseCardView.setData(introduction.getCid(), introduction.getcImage(), introduction.getcName(), introduction.getcInstructor(), introduction.getcDesc());
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = GridLayout.LayoutParams.WRAP_CONTENT;
             params.height = GridLayout.LayoutParams.WRAP_CONTENT;
