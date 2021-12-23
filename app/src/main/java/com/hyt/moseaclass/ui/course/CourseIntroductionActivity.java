@@ -50,6 +50,8 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
         binding.introductionAppbar.setStateListAnimator(stateListAnimator);
 
         binding.introductionViewpager.setAdapter(new CourseRelativityPagerAdapter(this, getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
+//        默认导航至课件页面
+        binding.introductionViewpager.setCurrentItem(1);
         binding.introductionTabs.setupWithViewPager(binding.introductionViewpager);
 
         Picasso.get().load(Uri.parse(introduction.getcImage())).into(binding.tbExpand.introductionImage);
