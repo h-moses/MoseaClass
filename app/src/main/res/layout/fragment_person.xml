@@ -4,19 +4,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    android:theme="@style/Theme.MoseaClass.PersonFragment"
+    android:background="@drawable/person_back"
+    tools:context=".ui.person.PersonFragment">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/person_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@android:color/transparent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent" >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/person_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/person_options_menu"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <Button
+        android:id="@+id/btn_perfect_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="完善资料，让我们更懂你 >"
+        android:textSize="13sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_profile_perfect"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/person_appbar" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profile_card"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/dp_5"
+        app:cardElevation="@dimen/dp_8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_perfect_profile" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp_16">
+
+            <com.hyt.moseaclass.components.RoundImageView
+                android:id="@+id/profile_avatar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_logo"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="真菜鸟"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18"
+                android:layout_marginLeft="@dimen/dp_16"
+                app:layout_constraintLeft_toRightOf="@id/profile_avatar"
+                app:layout_constraintTop_toTopOf="@id/profile_avatar" />
+
+            <TextView
+                android:id="@+id/profile_learning_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已学到96时5分"
+                android:textSize="12sp"
+                android:textColor="@color/gray_text"
+                android:background="@drawable/learning_time_back"
+                android:paddingHorizontal="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_10"
+                app:layout_constraintLeft_toLeftOf="@id/profile_name"
+                app:layout_constraintTop_toBottomOf="@id/profile_name" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_right"
+                android:scaleType="fitXY"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

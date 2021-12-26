@@ -16,7 +16,6 @@ import android.util.Log;
 
 public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView {
 
-    private static final String TAG = RoundImageView.class.getSimpleName();
     private final Paint paint;
 
     public RoundImageView(Context context) {
@@ -29,7 +28,6 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
 
     public RoundImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        Log.e(TAG, "RoundImageView: ");
         paint = new Paint();
     }
 
@@ -94,7 +92,6 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
             final Rect rectDest = new Rect(0, 0, getWidth(), getHeight());
             paint.reset();
             canvas.drawBitmap(b, rectSrc, rectDest, paint);
-
         } else {
             super.onDraw(canvas);
         }
