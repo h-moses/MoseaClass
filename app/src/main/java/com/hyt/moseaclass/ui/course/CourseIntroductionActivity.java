@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.hyt.moseaclass.R;
 import com.hyt.moseaclass.adapters.CourseRelativityPagerAdapter;
-import com.hyt.moseaclass.data.CourseIntroduction;
+import com.hyt.moseaclass.data.entity.CourseIntroduction;
 import com.hyt.moseaclass.databinding.ActivityCourseIntroductionBinding;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;

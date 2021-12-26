@@ -1,4 +1,4 @@
-package com.hyt.moseaclass.data;
+package com.hyt.moseaclass.data.entity;
 
 import java.util.ArrayList;
 import java.util.List;

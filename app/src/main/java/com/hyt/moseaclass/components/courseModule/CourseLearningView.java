@@ -1,8 +1,6 @@
 package com.hyt.moseaclass.components.courseModule;
 
 import android.content.Context;
-import android.net.Uri;
-import android.text.Html;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 
@@ -11,12 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.hyt.moseaclass.databinding.ViewCourseLearningBinding;
-import com.squareup.picasso.Picasso;
-
-import java.util.Locale;
 
 public class CourseLearningView extends ConstraintLayout {
-
 
 
     private final Context mContext;
@@ -30,7 +24,7 @@ public class CourseLearningView extends ConstraintLayout {
     public CourseLearningView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mContext = null;
-        binding = ViewCourseLearningBinding.inflate(LayoutInflater.from(mContext),this, true);
+        binding = ViewCourseLearningBinding.inflate(LayoutInflater.from(mContext), this, true);
     }
 
     public CourseLearningView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

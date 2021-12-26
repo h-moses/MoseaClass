@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.hyt.moseaclass.adapters.CourseLearningAdapter;
-import com.hyt.moseaclass.data.LearningCourse;
+import com.hyt.moseaclass.data.entity.LearningCourse;
 import com.hyt.moseaclass.databinding.FragmentCourseBinding;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 
@@ -49,7 +49,7 @@ public class CourseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentCourseBinding.inflate(inflater, container, false);
-        binding.tvCourseLearningCount.setText(String.format(Locale.CHINA,COURSE_COUNT_TEMPLATE,learningCourseList.size()));
+        binding.tvCourseLearningCount.setText(String.format(Locale.CHINA, COURSE_COUNT_TEMPLATE, learningCourseList.size()));
         binding.learningCourseRecyclerView.setAdapter(new CourseLearningAdapter(learningCourseList, getContext()));
         binding.learningCourseRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return binding.getRoot();
@@ -60,7 +60,7 @@ public class CourseFragment extends Fragment {
         learningCourseList = new ArrayList<>();
         LearningCourse learningCourse = null;
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("uid","1");
+        builder.add("uid", "1");
         JSONArray array = OkHttpUtils.post("http://101.133.173.40:8090/edusys/course/getLearntCourse?", builder.build());
         Log.e(TAG, "initData: " + array.length());
         for (int i = 0; i < array.length(); i++) {

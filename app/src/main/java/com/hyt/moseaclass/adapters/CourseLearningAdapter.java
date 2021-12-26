@@ -2,27 +2,23 @@ package com.hyt.moseaclass.adapters;
 
 import android.content.Context;
 import android.net.Uri;
-import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hyt.moseaclass.R;
-import com.hyt.moseaclass.data.LearningCourse;
+import com.hyt.moseaclass.data.entity.LearningCourse;
 import com.hyt.moseaclass.databinding.ViewCourseLearningBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class CourseLearningAdapter extends RecyclerView.Adapter<CourseLearningAdapter.ViewHolder> {
     private static final String PROCESS_TEMPLATE = "已学到<font color = '#00CC7E'>%s</font>";
-    private List<LearningCourse> learningCourseList = new ArrayList<>();
     private final Context mContext;
+    private List<LearningCourse> learningCourseList = new ArrayList<>();
 
     public CourseLearningAdapter(List<LearningCourse> learningCourseList, Context mContext) {
         this.learningCourseList = learningCourseList;

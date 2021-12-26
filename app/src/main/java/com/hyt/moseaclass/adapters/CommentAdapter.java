@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hyt.moseaclass.data.CourseComment;
+import com.hyt.moseaclass.data.entity.CourseComment;
 import com.hyt.moseaclass.databinding.ViewCommentBinding;
 import com.squareup.picasso.Picasso;
 

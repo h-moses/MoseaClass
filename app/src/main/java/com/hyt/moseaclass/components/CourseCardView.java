@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.hyt.moseaclass.data.CourseIntroduction;
+import com.hyt.moseaclass.data.entity.CourseIntroduction;
 import com.hyt.moseaclass.databinding.ViewCourseCardBinding;
 import com.hyt.moseaclass.ui.course.CourseIntroductionActivity;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;

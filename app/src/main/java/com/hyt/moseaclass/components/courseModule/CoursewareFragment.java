@@ -14,8 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.hyt.moseaclass.R;
-import com.hyt.moseaclass.data.CourseChapter;
-import com.hyt.moseaclass.data.CourseSection;
+import com.hyt.moseaclass.data.entity.CourseChapter;
+import com.hyt.moseaclass.data.entity.CourseSection;
 import com.hyt.moseaclass.databinding.FragmentCoursewareBinding;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;

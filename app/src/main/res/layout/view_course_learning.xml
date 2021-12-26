@@ -3,27 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/dp_16"
     android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:foreground="?android:attr/selectableItemBackground"
+    android:padding="@dimen/dp_16">
 
     <ImageView
         android:id="@+id/learning_course_image"
         android:layout_width="150dp"
         android:layout_height="90dp"
         android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/learning_course_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_16"
-        android:textColor="@color/black"
-        android:ellipsize="end"
         android:layout_marginStart="@dimen/dp_16"
+        android:ellipsize="end"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16"
         app:layout_constraintLeft_toRightOf="@id/learning_course_image"
         app:layout_constraintTop_toTopOf="@id/learning_course_image" />
 
@@ -31,9 +31,9 @@
         android:id="@+id/learning_course_teacher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_14"
-        android:textColor="@color/gray_text"
         android:layout_marginTop="@dimen/dp_5"
+        android:textColor="@color/gray_text"
+        android:textSize="@dimen/sp_14"
         app:layout_constraintLeft_toLeftOf="@id/learning_course_name"
         app:layout_constraintTop_toBottomOf="@id/learning_course_name" />
 
@@ -41,10 +41,10 @@
         android:id="@+id/learning_course_process"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_14"
         android:textColor="@color/gray_text"
-        app:layout_constraintLeft_toLeftOf="@id/learning_course_name"
-        app:layout_constraintBottom_toBottomOf="@id/learning_course_image" />
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="@id/learning_course_image"
+        app:layout_constraintLeft_toLeftOf="@id/learning_course_name" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.hyt.moseaclass.data;
+package com.hyt.moseaclass.data.entity;
 
 /*
  * 课程评价

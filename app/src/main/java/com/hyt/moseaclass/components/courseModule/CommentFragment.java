@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.hyt.moseaclass.adapters.CommentAdapter;
-import com.hyt.moseaclass.data.CourseComment;
+import com.hyt.moseaclass.data.entity.CourseComment;
 import com.hyt.moseaclass.databinding.FragmentCommentBinding;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
