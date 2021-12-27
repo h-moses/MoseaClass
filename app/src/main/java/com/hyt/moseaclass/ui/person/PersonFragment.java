@@ -2,6 +2,7 @@ package com.hyt.moseaclass.ui.person;
 
 import android.animation.ObjectAnimator;
 import android.animation.StateListAnimator;
+import android.app.Person;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.hyt.moseaclass.adapters.PersonOptionsAdapter;
 import com.hyt.moseaclass.databinding.FragmentPersonBinding;
 
 public class PersonFragment extends Fragment {
@@ -25,6 +28,9 @@ public class PersonFragment extends Fragment {
         StateListAnimator stateListAnimator = new StateListAnimator();
         stateListAnimator.addState(new int[0], ObjectAnimator.ofFloat(binding.personAppbar, "elevation", 0.1f));
         binding.personAppbar.setStateListAnimator(stateListAnimator);
+
+        binding.personRecyclerView.setAdapter(new PersonOptionsAdapter(getContext()));
+        binding.personRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return binding.getRoot();
     }
 }
