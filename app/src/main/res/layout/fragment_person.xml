@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.MoseaClass.PersonFragment"
     android:background="@drawable/person_back"
+    android:theme="@style/Theme.MoseaClass.PersonFragment"
     tools:context=".ui.person.PersonFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -14,14 +14,14 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent" >
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/person_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/person_options_menu"/>
+            app:menu="@menu/person_options_menu" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,12 +29,12 @@
         android:id="@+id/btn_perfect_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="完善资料，让我们更懂你 >"
-        android:textSize="13sp"
-        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
         android:background="@drawable/btn_profile_perfect"
         android:paddingHorizontal="@dimen/dp_16"
-        android:layout_marginTop="20dp"
+        android:text="完善资料，让我们更懂你 >"
+        android:textColor="@color/white"
+        android:textSize="13sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/person_appbar" />
@@ -43,15 +43,15 @@
         android:id="@+id/profile_card"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="@dimen/dp_5"
         app:cardElevation="@dimen/dp_8"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_perfect_profile" >
+        app:layout_constraintTop_toBottomOf="@id/btn_perfect_profile">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -63,18 +63,18 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
                 android:text="真菜鸟"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_18"
-                android:layout_marginLeft="@dimen/dp_16"
                 app:layout_constraintLeft_toRightOf="@id/profile_avatar"
                 app:layout_constraintTop_toTopOf="@id/profile_avatar" />
 
@@ -82,23 +82,23 @@
                 android:id="@+id/profile_learning_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已学到96时5分"
-                android:textSize="12sp"
-                android:textColor="@color/gray_text"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/learning_time_back"
                 android:paddingHorizontal="@dimen/dp_5"
-                android:layout_marginTop="@dimen/dp_10"
+                android:text="已学到96时5分"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="@id/profile_name"
                 app:layout_constraintTop_toBottomOf="@id/profile_name" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_right"
                 android:scaleType="fitXY"
-                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -117,16 +117,16 @@
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="60dp"
+        android:background="@color/white"
+        android:elevation="0dp"
         android:text="退出登录"
         android:textColor="#f00"
         android:textSize="@dimen/sp_16"
-        android:elevation="0dp"
-        android:background="@color/white"
-        android:layout_marginTop="@dimen/dp_16"
-        android:layout_marginBottom="60dp"
-        android:layout_marginHorizontal="@dimen/dp_16"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

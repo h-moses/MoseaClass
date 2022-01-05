@@ -1,9 +1,7 @@
 package com.hyt.moseaclass.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.DrawableRes;
@@ -14,7 +12,6 @@ import com.hyt.moseaclass.R;
 import com.hyt.moseaclass.databinding.ViewPersonOptionBinding;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class PersonOptionsAdapter extends RecyclerView.Adapter<PersonOptionsAdap
 
     private static final String TAG = PersonOptionsAdapter.class.getSimpleName();
     private final Context mContext;
-    private final List<String> nameList = Arrays.asList("我的课程","我的讨论");
+    private final List<String> nameList = Arrays.asList("我的课程", "我的讨论");
     @DrawableRes
     private final List<Integer> iconList = Arrays.asList(R.drawable.ic_live, R.drawable.ic_discussion);
 
@@ -33,7 +30,7 @@ public class PersonOptionsAdapter extends RecyclerView.Adapter<PersonOptionsAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewPersonOptionBinding binding = ViewPersonOptionBinding.inflate(LayoutInflater.from(mContext),parent, false);
+        ViewPersonOptionBinding binding = ViewPersonOptionBinding.inflate(LayoutInflater.from(mContext), parent, false);
         return new ViewHolder(binding);
     }
 

@@ -2,7 +2,6 @@ package com.hyt.moseaclass.ui.person;
 
 import android.animation.ObjectAnimator;
 import android.animation.StateListAnimator;
-import android.app.Person;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ public class PersonFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentPersonBinding.inflate(inflater,container,false);
+        binding = FragmentPersonBinding.inflate(inflater, container, false);
         //        将应用栏与背景色融为一体，去除高程
         StateListAnimator stateListAnimator = new StateListAnimator();
         stateListAnimator.addState(new int[0], ObjectAnimator.ofFloat(binding.personAppbar, "elevation", 0.1f));

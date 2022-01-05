@@ -11,6 +11,7 @@ import com.hyt.moseaclass.data.entity.UserInfo;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 @Database(entities = {UserInfo.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static final int NUMBER_OF_THREAD = 2;

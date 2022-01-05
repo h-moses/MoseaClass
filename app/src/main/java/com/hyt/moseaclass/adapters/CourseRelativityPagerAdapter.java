@@ -34,7 +34,7 @@ public class CourseRelativityPagerAdapter extends FragmentPagerAdapter {
         if (0 == position) {
             return new IntroductionFragment();
         } else if (1 == position) {
-            return new CoursewareFragment();
+            return new CoursewareFragment(mContext);
         } else if (2 == position) {
             return new CommentFragment();
         } else if (3 == position) {

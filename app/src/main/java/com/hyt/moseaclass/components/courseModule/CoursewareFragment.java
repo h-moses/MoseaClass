@@ -1,8 +1,10 @@
 package com.hyt.moseaclass.components.courseModule;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.hyt.moseaclass.R;
 import com.hyt.moseaclass.data.entity.CourseChapter;
 import com.hyt.moseaclass.data.entity.CourseSection;
 import com.hyt.moseaclass.databinding.FragmentCoursewareBinding;
+import com.hyt.moseaclass.ui.course.VideoPlayerActivity;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 
@@ -34,8 +37,13 @@ public class CoursewareFragment extends Fragment {
 
     private FragmentCoursewareBinding binding;
 
-    private List<CourseChapter> chapterList = new ArrayList<>();
-    private List<List<CourseSection>> sectionList = new ArrayList<>();
+    private final Context mContext;
+    private final List<CourseChapter> chapterList = new ArrayList<>();
+    private final List<List<CourseSection>> sectionList = new ArrayList<>();
+
+    public CoursewareFragment(Context mContext) {
+        this.mContext = mContext;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +65,7 @@ public class CoursewareFragment extends Fragment {
 
     private void initData() throws JSONException {
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("id", String.valueOf(SharedPreferenceUtils.getInteger(getContext(), "id", 0)));
+        builder.add("id", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(), "id", 0)));
         JSONArray jsonArray = OkHttpUtils.post("http://101.133.173.40:8090/edusys/course/getCourseCatalogue?", builder.build());
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -86,6 +94,7 @@ public class CoursewareFragment extends Fragment {
 
         private static final String ChapterNameTemplate = "第 %d 章 %s";
         private static final String SectionNameTemplate = "%d - %d %s";
+        private static final String TAG = CourseWareAdapter.class.getSimpleName();
         private final Context context;
         private final List<CourseChapter> chapterList;
         private final List<List<CourseSection>> sectionList;
@@ -161,6 +170,14 @@ public class CoursewareFragment extends Fragment {
             SectionViewHolder sectionViewHolder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.item_section, parent, false);
+                convertView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(parent.getContext(), VideoPlayerActivity.class);
+                        intent.putExtra("video_url",sectionList.get(groupPosition).get(childPosition).getsUrl());
+                        parent.getContext().startActivity(intent);
+                    }
+                });
                 sectionViewHolder = new SectionViewHolder();
                 sectionViewHolder.tv_section_name = convertView.findViewById(R.id.tv_section_name);
                 convertView.setTag(sectionViewHolder);

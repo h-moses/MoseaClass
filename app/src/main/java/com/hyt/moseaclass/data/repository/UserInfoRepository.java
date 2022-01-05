@@ -26,7 +26,7 @@ public class UserInfoRepository {
 
     public LiveData<Integer> queryLoginState(Integer uid) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-             loginState = this.userInfoDao.queryLogin(uid);
+            loginState = this.userInfoDao.queryLogin(uid);
         });
         return loginState;
     }
