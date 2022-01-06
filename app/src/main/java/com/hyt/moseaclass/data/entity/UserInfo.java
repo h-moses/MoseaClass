@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 @Entity(tableName = "userInfo")
 public class UserInfo {
 
@@ -77,6 +79,7 @@ public class UserInfo {
         this.isLogin = login;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "UserInfo{" +

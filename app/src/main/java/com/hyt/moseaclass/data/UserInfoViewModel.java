@@ -1,4 +1,4 @@
-package com.hyt.moseaclass.ui.login;
+package com.hyt.moseaclass.data;
 
 import android.app.Application;
 
@@ -11,8 +11,9 @@ import com.hyt.moseaclass.data.repository.UserInfoRepository;
 
 public class UserInfoViewModel extends AndroidViewModel {
 
+    private static final String TAG = UserInfoViewModel.class.getSimpleName();
     private final UserInfoRepository userInfoRepository;
-    private LiveData<UserInfo> userInfoLiveData;
+    private LiveData<UserInfo> userInfo;
     private LiveData<Integer> loginState;
 
     public UserInfoViewModel(@NonNull Application application) {
@@ -21,8 +22,8 @@ public class UserInfoViewModel extends AndroidViewModel {
     }
 
     public LiveData<UserInfo> getUserInfoLiveData(Integer uid) {
-        this.userInfoLiveData = userInfoRepository.queryUserInfo(uid);
-        return userInfoLiveData;
+        this.userInfo = userInfoRepository.queryUserInfo(uid);
+        return userInfo;
     }
 
     public LiveData<Integer> getLoginState(Integer uid) {

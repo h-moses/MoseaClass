@@ -1,5 +1,6 @@
 package com.hyt.moseaclass.data.dao;
 
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;

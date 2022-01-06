@@ -2,6 +2,7 @@ package com.hyt.moseaclass.data.repository;
 
 import android.app.Application;
 
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 
 import com.hyt.moseaclass.data.AppDatabase;

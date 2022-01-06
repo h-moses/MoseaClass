@@ -54,7 +54,7 @@ public class CommentFragment extends Fragment {
     private void initData() throws JSONException {
         commentList = new ArrayList<>();
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("cid", String.valueOf(SharedPreferenceUtils.getInteger(getContext(), "id", 0)));
+        builder.add("cid", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(), SharedPreferenceUtils.COURSE_FILE, "cid", Integer.MIN_VALUE)));
         JSONArray array = OkHttpUtils.post("http://101.133.173.40:8090/edusys/course/getCourseEvaluation?", builder.build());
         for (int i = 0; i < array.length(); i++) {
             JSONObject jsonObject = array.getJSONObject(i);

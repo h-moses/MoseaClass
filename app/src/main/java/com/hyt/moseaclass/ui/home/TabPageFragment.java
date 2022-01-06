@@ -46,19 +46,12 @@ public class TabPageFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "onCreate: " + tabTitle);
         try {
             initData();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.e(TAG, "onStart: " + tabTitle);
     }
 
     @Nullable
@@ -70,14 +63,7 @@ public class TabPageFragment extends Fragment {
         courseAlbum = binding.courseAlbum;
         bannerView.setBannerData(bannerImages);
         courseAlbum.setCourseAlbumData(courseIntroductions);
-        Log.e(TAG, "onCreateView: " + tabTitle);
         return binding.getRoot();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.e(TAG, "onResume: " + tabTitle);
     }
 
     private void initData() throws JSONException {
@@ -102,21 +88,4 @@ public class TabPageFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.e(TAG, "onPause: " + tabTitle);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.e(TAG, "onStop: " + tabTitle);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.e(TAG, "onDestroy: " + tabTitle);
-    }
 }

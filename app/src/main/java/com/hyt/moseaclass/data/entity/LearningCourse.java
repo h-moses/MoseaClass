@@ -4,33 +4,34 @@ public class LearningCourse {
 
     private int id;
     private int cid;
-    private int pid;
+    private int catalogueId;
+    private int orderId;
 
 
     private String cName;
     private String cCover;
+    private String cDesc;
     private String uName;
     private String pTitle;
-    private String lTime;
 
-    public LearningCourse(int id, int cid, String cName, String cCover, String uName, String lTime) {
+    public LearningCourse(int id, int cid, int catalogueId, int orderId, String cName, String cCover, String uName, String cDesc) {
         this.id = id;
         this.cid = cid;
+        this.catalogueId = catalogueId;
+        this.orderId = orderId;
         this.cName = cName;
         this.cCover = cCover;
         this.uName = uName;
-        this.lTime = lTime;
+        this.cDesc = cDesc;
     }
 
-    public LearningCourse(int id, int cid, int pid, String cName, String cCover, String uName, String pTitle, String lTime) {
+    public LearningCourse(int id, int cid, String cName, String cCover, String uName, String cDesc) {
         this.id = id;
         this.cid = cid;
-        this.pid = pid;
         this.cName = cName;
         this.cCover = cCover;
         this.uName = uName;
-        this.pTitle = pTitle;
-        this.lTime = lTime;
+        this.cDesc = cDesc;
     }
 
     public int getId() {
@@ -49,12 +50,20 @@ public class LearningCourse {
         this.cid = cid;
     }
 
-    public int getPid() {
-        return pid;
+    public int getCatalogueId() {
+        return catalogueId;
     }
 
-    public void setPid(int pid) {
-        this.pid = pid;
+    public void setCatalogueId(int catalogueId) {
+        this.catalogueId = catalogueId;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public String getcName() {
@@ -89,11 +98,26 @@ public class LearningCourse {
         this.pTitle = pTitle;
     }
 
-    public String getlTime() {
-        return lTime;
+    public String getcDesc() {
+        return cDesc;
     }
 
-    public void setlTime(String lTime) {
-        this.lTime = lTime;
+    public void setcDesc(String cDesc) {
+        this.cDesc = cDesc;
+    }
+
+    @Override
+    public String toString() {
+        return "LearningCourse{" +
+                "id=" + id +
+                ", cid=" + cid +
+                ", catalogueId=" + catalogueId +
+                ", orderId=" + orderId +
+                ", cName='" + cName + '\'' +
+                ", cCover='" + cCover + '\'' +
+                ", cDesc='" + cDesc + '\'' +
+                ", uName='" + uName + '\'' +
+                ", pTitle='" + pTitle + '\'' +
+                '}';
     }
 }

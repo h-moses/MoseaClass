@@ -2,6 +2,7 @@ package com.hyt.moseaclass.components;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,19 +57,17 @@ public class CourseCardView extends RelativeLayout implements View.OnClickListen
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(getContext(), CourseIntroductionActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("id", introduction.getCid());
-//        bundle.putString("desc", introduction.getcDesc());
-//        bundle.putString("image", introduction.getcImage());
-//        bundle.putString("name", introduction.getcName());
-//        bundle.putString("teacher", introduction.getcInstructor());
-//        intent.putExtra("course", bundle);
-        SharedPreferenceUtils.clear(getContext());
-        SharedPreferenceUtils.setInteger(getContext(), "id", introduction.getCid());
-        SharedPreferenceUtils.setString(getContext(), "name", introduction.getcName());
-        SharedPreferenceUtils.setString(getContext(), "image", introduction.getcImage());
-        SharedPreferenceUtils.setString(getContext(), "teacher", introduction.getcInstructor());
-        SharedPreferenceUtils.setString(getContext(), "desc", introduction.getcDesc());
+        Bundle bundle = new Bundle();
+        bundle.putInt("cid", introduction.getCid());
+        bundle.putString("title", introduction.getcName());
+        bundle.putString("cover", introduction.getcImage());
+        bundle.putString("uName", introduction.getcInstructor());
+        bundle.putString("desc", introduction.getcDesc());
+        SharedPreferenceUtils.clear(getContext(), SharedPreferenceUtils.COURSE_FILE);
+        SharedPreferenceUtils.setInteger(getContext(), SharedPreferenceUtils.COURSE_FILE,"cid", introduction.getCid());
+        SharedPreferenceUtils.setString(getContext(),SharedPreferenceUtils.COURSE_FILE, "title", introduction.getcName());
+        SharedPreferenceUtils.setString(getContext(),SharedPreferenceUtils.COURSE_FILE, "desc", introduction.getcDesc());
+        intent.putExtra("data",bundle);
         mContext.startActivity(intent);
     }
 }

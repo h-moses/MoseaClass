@@ -1,0 +1,43 @@
+package com.hyt.moseaclass.state;
+
+import android.content.Context;
+
+import com.hyt.moseaclass.data.entity.UserInfo;
+import com.hyt.moseaclass.utils.SharedPreferenceUtils;
+
+public class UserContext {
+
+    public static final String KEY_LOGIN = "IsLogin";
+    public static final String KEY_UID = "UID";
+    private static final UserContext instance = new UserContext();
+    private UserState mState;
+
+    private Boolean isLogin = false;
+
+    private UserContext(){}
+
+    public static UserContext getInstance() {
+        return instance;
+    }
+
+    public Boolean getIsLogin(Context context) {
+        return SharedPreferenceUtils.getBoolean(context, SharedPreferenceUtils.LOGIN_STATE, UserContext.KEY_LOGIN, false);
+    }
+
+    public void login(Context context) {
+        mState.login(context);
+    }
+
+    public void setLoginState(Context context, int uid) {
+        SharedPreferenceUtils.setBoolean(context,SharedPreferenceUtils.LOGIN_STATE, KEY_LOGIN, true);
+        SharedPreferenceUtils.setInteger(context,SharedPreferenceUtils.LOGIN_STATE,KEY_UID, uid);
+        mState = new LoginState();
+        isLogin = true;
+    }
+
+    public void setLogoutState(Context context) {
+        SharedPreferenceUtils.setBoolean(context,SharedPreferenceUtils.LOGIN_STATE, KEY_LOGIN, false);
+        SharedPreferenceUtils.clear(context,SharedPreferenceUtils.LOGIN_STATE);
+        mState = new LogoutState();
+    }
+}

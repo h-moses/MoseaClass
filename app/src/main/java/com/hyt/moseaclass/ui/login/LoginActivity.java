@@ -11,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.hyt.moseaclass.MainActivity;
+import com.hyt.moseaclass.data.UserInfoViewModel;
 import com.hyt.moseaclass.data.entity.UserInfo;
 import com.hyt.moseaclass.databinding.ActivityLoginBinding;
+import com.hyt.moseaclass.state.UserContext;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 
 import org.json.JSONException;
@@ -41,6 +43,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        if (UserContext.getInstance().getIsLogin(this)) {
+            goMainActivity();
+        } else {
+            Toast.makeText(this, "用户未登录", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void userLogin(String phone, String pwd, String role) throws JSONException {
@@ -57,11 +64,18 @@ public class LoginActivity extends AppCompatActivity {
             UserInfo userInfo = new UserInfo(uid, nick_name, phone1, avatar);
             userInfo.setIsLogin(1);
             viewModel.getUserInfoRepository().insertUser(userInfo);
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+//            设置登录状态
+            UserContext.getInstance().setLoginState(this, uid);
+//            跳转到主界面
+            goMainActivity();
         } else {
             Toast.makeText(this, "该用户不存在", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void goMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

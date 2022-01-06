@@ -32,6 +32,8 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     private ActivityCourseIntroductionBinding binding;
     private CourseIntroduction introduction;
 
+    public CourseIntroductionActivity() { }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,9 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     private void handleIntent() {
 //        Bundle course = getIntent().getBundleExtra("course");
 //        assert course != null;
-        introduction = new CourseIntroduction(SharedPreferenceUtils.getInteger(this, "id", Integer.MIN_VALUE), SharedPreferenceUtils.getString(this, "name", ""), SharedPreferenceUtils.getString(this, "image", ""), SharedPreferenceUtils.getString(this, "teacher", ""), SharedPreferenceUtils.getString(this, "desc", ""));
+//        boolean isLearning = getIntent().getBooleanExtra("isLearning", false);
+        Bundle data = getIntent().getBundleExtra("data");
+        introduction = new CourseIntroduction(data.getInt("cid"), data.getString("title"),data.getString("cover"),data.getString("uName"),data.getString("desc"));
     }
 
     @Override

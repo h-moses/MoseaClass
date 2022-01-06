@@ -31,19 +31,4 @@ public class CourseLearningView extends ConstraintLayout {
         super(context, attrs, defStyleAttr);
         mContext = null;
     }
-
-//    public void setData(String url, String name, String instructor, String process) {
-//        Picasso.get().load(Uri.parse(url)).into(binding.learningCourseImage);
-//        binding.learningCourseName.setText(name);
-//        binding.learningCourseTeacher.setText(instructor);
-//        String format = String.format(Locale.CHINA, PROCESS_TEMPLATE, process);
-//        CharSequence charSequence;
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//            charSequence = Html.fromHtml(format, Html.FROM_HTML_MODE_LEGACY);
-//        } else {
-//            charSequence = Html.fromHtml(format);
-//        }
-//        binding.learningCourseProcess.setText(charSequence);
-//    }
-
 }
