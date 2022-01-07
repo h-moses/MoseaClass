@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.hyt.moseaclass.adapters.CommentAdapter;
 import com.hyt.moseaclass.data.entity.CourseComment;
 import com.hyt.moseaclass.databinding.FragmentCommentBinding;
+import com.hyt.moseaclass.state.UserContext;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 
@@ -54,7 +55,7 @@ public class CommentFragment extends Fragment {
     private void initData() throws JSONException {
         commentList = new ArrayList<>();
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("cid", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(), SharedPreferenceUtils.COURSE_FILE, "cid", Integer.MIN_VALUE)));
+        builder.add("cid", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(), SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, Integer.MIN_VALUE)));
         JSONArray array = OkHttpUtils.post("http://101.133.173.40:8090/edusys/course/getCourseEvaluation?", builder.build());
         for (int i = 0; i < array.length(); i++) {
             JSONObject jsonObject = array.getJSONObject(i);

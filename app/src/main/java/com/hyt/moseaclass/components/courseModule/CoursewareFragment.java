@@ -19,6 +19,7 @@ import com.hyt.moseaclass.R;
 import com.hyt.moseaclass.data.entity.CourseChapter;
 import com.hyt.moseaclass.data.entity.CourseSection;
 import com.hyt.moseaclass.databinding.FragmentCoursewareBinding;
+import com.hyt.moseaclass.state.UserContext;
 import com.hyt.moseaclass.ui.course.VideoPlayerActivity;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
@@ -65,7 +66,7 @@ public class CoursewareFragment extends Fragment {
 
     private void initData() throws JSONException {
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("id", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(),SharedPreferenceUtils.COURSE_FILE, "cid", Integer.MIN_VALUE)));
+        builder.add("id", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(),SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, Integer.MIN_VALUE)));
         JSONArray jsonArray = OkHttpUtils.post("http://101.133.173.40:8090/edusys/course/getCourseCatalogue?", builder.build());
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);

@@ -2,6 +2,8 @@ package com.hyt.moseaclass.ui.person;
 
 import android.animation.ObjectAnimator;
 import android.animation.StateListAnimator;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import com.hyt.moseaclass.data.UserInfoViewModel;
 import com.hyt.moseaclass.data.entity.UserInfo;
 import com.hyt.moseaclass.databinding.FragmentPersonBinding;
 import com.hyt.moseaclass.state.UserContext;
+import com.hyt.moseaclass.ui.login.LoginActivity;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +47,9 @@ public class PersonFragment extends Fragment {
         binding.personRecyclerView.setAdapter(new PersonOptionsAdapter(getContext()));
         binding.personRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        binding.profileName.setText("立即登录");
+        Picasso.get().load(Uri.parse("http://edu-image.nosdn.127.net/6e66dbdc55464a44889c6a25428b2b4b.png?imageView&quality=100")).into(binding.profileAvatar);
+
          UserInfoViewModel viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(UserInfoViewModel.class);
         if (UserContext.getInstance().getIsLogin(requireContext())) {
             LiveData<UserInfo> userInfoLiveData = viewModel.getUserInfoLiveData(SharedPreferenceUtils.getInteger(requireContext(), SharedPreferenceUtils.LOGIN_STATE, UserContext.KEY_UID, 0));
@@ -57,7 +63,21 @@ public class PersonFragment extends Fragment {
                 });
             }
         }
-        binding.btnLogout.setOnClickListener(view -> UserContext.getInstance().setLogoutState(requireContext()));
+        binding.btnLogout.setOnClickListener(view -> {
+            UserContext.getInstance().setLogoutState(requireContext());
+            binding.profileName.setText("立即登录");
+            Picasso.get().load(Uri.parse("http://edu-image.nosdn.127.net/6e66dbdc55464a44889c6a25428b2b4b.png?imageView&quality=100")).into(binding.profileAvatar);
+        });
+
+        binding.profileCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!UserContext.getInstance().getIsLogin(requireContext())) {
+                    Intent intent = new Intent(requireContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
         return binding.getRoot();
     }
 }

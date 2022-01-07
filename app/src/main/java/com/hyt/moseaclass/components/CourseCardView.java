@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.hyt.moseaclass.data.entity.CourseIntroduction;
 import com.hyt.moseaclass.databinding.ViewCourseCardBinding;
+import com.hyt.moseaclass.state.UserContext;
 import com.hyt.moseaclass.ui.course.CourseIntroductionActivity;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;
@@ -64,7 +65,7 @@ public class CourseCardView extends RelativeLayout implements View.OnClickListen
         bundle.putString("uName", introduction.getcInstructor());
         bundle.putString("desc", introduction.getcDesc());
         SharedPreferenceUtils.clear(getContext(), SharedPreferenceUtils.COURSE_FILE);
-        SharedPreferenceUtils.setInteger(getContext(), SharedPreferenceUtils.COURSE_FILE,"cid", introduction.getCid());
+        SharedPreferenceUtils.setInteger(getContext(), SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, introduction.getCid());
         SharedPreferenceUtils.setString(getContext(),SharedPreferenceUtils.COURSE_FILE, "title", introduction.getcName());
         SharedPreferenceUtils.setString(getContext(),SharedPreferenceUtils.COURSE_FILE, "desc", introduction.getcDesc());
         intent.putExtra("data",bundle);

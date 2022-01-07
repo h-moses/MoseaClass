@@ -10,4 +10,6 @@
     <color name="blue_primary">#1966ff</color>
     <color name="gray_back">#EDEDED</color>
     <color name="gray_text">#999999</color>
+    <color name="green">#00CC7E</color>
+    <color name="red">#EF1313</color>
 </resources>

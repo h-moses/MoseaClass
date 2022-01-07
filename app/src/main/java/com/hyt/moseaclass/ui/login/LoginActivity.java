@@ -45,8 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         });
         if (UserContext.getInstance().getIsLogin(this)) {
             goMainActivity();
-        } else {
-            Toast.makeText(this, "用户未登录", Toast.LENGTH_SHORT).show();
         }
     }
 

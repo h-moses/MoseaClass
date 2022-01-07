@@ -12,6 +12,14 @@ public class LogoutState implements UserState {
         goLoginActivity(context);
     }
 
+    @Override
+    public void joinCourse(Context context, int uid, int cid) {
+    }
+
+    @Override
+    public void quitCourse(Context context, int uid, int cid) {
+    }
+
     private void goLoginActivity(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);

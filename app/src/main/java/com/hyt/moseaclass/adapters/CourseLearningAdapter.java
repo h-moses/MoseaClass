@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hyt.moseaclass.data.entity.LearningCourse;
 import com.hyt.moseaclass.databinding.ViewCourseLearningBinding;
+import com.hyt.moseaclass.state.UserContext;
 import com.hyt.moseaclass.ui.course.CourseIntroductionActivity;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;
@@ -49,7 +50,7 @@ public class CourseLearningAdapter extends RecyclerView.Adapter<CourseLearningAd
                 Bundle bundle = new Bundle();
                 SharedPreferenceUtils.clear(mContext,SharedPreferenceUtils.COURSE_FILE);
                 SharedPreferenceUtils.setInteger(mContext,SharedPreferenceUtils.COURSE_FILE,"id", learningCourseList.get(position).getId());
-                SharedPreferenceUtils.setInteger(mContext,SharedPreferenceUtils.COURSE_FILE,"cid", learningCourseList.get(position).getCid());
+                SharedPreferenceUtils.setInteger(mContext,SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, learningCourseList.get(position).getCid());
                 SharedPreferenceUtils.setInteger(mContext,SharedPreferenceUtils.COURSE_FILE,"catalogue_id",learningCourseList.get(position).getCatalogueId());
                 SharedPreferenceUtils.setInteger(mContext,SharedPreferenceUtils.COURSE_FILE,"order_id",learningCourseList.get(position).getOrderId());
                 SharedPreferenceUtils.setString(mContext,SharedPreferenceUtils.COURSE_FILE,"title", learningCourseList.get(position).getcName());

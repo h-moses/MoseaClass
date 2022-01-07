@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +21,18 @@ import com.hyt.moseaclass.R;
 import com.hyt.moseaclass.adapters.CourseRelativityPagerAdapter;
 import com.hyt.moseaclass.data.entity.CourseIntroduction;
 import com.hyt.moseaclass.databinding.ActivityCourseIntroductionBinding;
+import com.hyt.moseaclass.state.UserContext;
+import com.hyt.moseaclass.state.UserState;
+import com.hyt.moseaclass.utils.OkHttpUtils;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Objects;
+
+import okhttp3.FormBody;
 
 
 public class CourseIntroductionActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
@@ -32,12 +41,17 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     private ActivityCourseIntroductionBinding binding;
     private CourseIntroduction introduction;
 
-    public CourseIntroductionActivity() { }
+    private boolean isJoin = false;
+    private int cid;
+    private int uid;
+
+    public CourseIntroductionActivity() {}
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handleIntent();
+
         binding = ActivityCourseIntroductionBinding.inflate(LayoutInflater.from(this), null, false);
         setContentView(binding.getRoot());
         setSupportActionBar(binding.courseToolbar);
@@ -56,18 +70,50 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
         binding.introductionViewpager.setCurrentItem(1);
         binding.introductionTabs.setupWithViewPager(binding.introductionViewpager);
 
+        try {
+            initState();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (isJoin) {
+            switchBtnState("退出学习",R.drawable.btn_quit_course);
+        } else {
+            switchBtnState("加入学习",R.drawable.login_btn_back);
+        }
+
         Picasso.get().load(Uri.parse(introduction.getcImage())).into(binding.tbExpand.introductionImage);
         binding.tbExpand.introductionName.setText(introduction.getcName());
         binding.tbExpand.introductionDepart.setText(introduction.getcInstructor());
         binding.introductionAppbar.addOnOffsetChangedListener(this);
+
+        binding.btnJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!UserContext.getInstance().getIsLogin(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(),"用户未登录，无法加入课程！",Toast.LENGTH_SHORT).show();
+                } else {
+                    if (isJoin) {
+                        UserContext.getInstance().getmState().quitCourse(getApplicationContext(), uid, cid);
+//                        switchBtnState("加入学习",R.drawable.login_btn_back);
+                    } else {
+                        UserContext.getInstance().getmState().joinCourse(getApplicationContext(), uid, cid);
+                        switchBtnState("退出学习",R.drawable.btn_quit_course);
+                    }
+                }
+            }
+        });
+    }
+
+    private void switchBtnState(String text, int resId) {
+        binding.btnJoin.setText(text);
+        binding.btnJoin.setBackgroundResource(resId);
     }
 
     private void handleIntent() {
-//        Bundle course = getIntent().getBundleExtra("course");
-//        assert course != null;
-//        boolean isLearning = getIntent().getBooleanExtra("isLearning", false);
         Bundle data = getIntent().getBundleExtra("data");
-        introduction = new CourseIntroduction(data.getInt("cid"), data.getString("title"),data.getString("cover"),data.getString("uName"),data.getString("desc"));
+        if (data != null) {
+            introduction = new CourseIntroduction(data.getInt("cid"), data.getString("title"),data.getString("cover"),data.getString("uName"),data.getString("desc"));
+        }
     }
 
     @Override
@@ -95,5 +141,19 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
                 getSupportActionBar().setHomeAsUpIndicator(upArrow);
             }
         }
+    }
+
+
+    private void initState() throws JSONException {
+        uid = SharedPreferenceUtils.getInteger(this, SharedPreferenceUtils.LOGIN_STATE, UserContext.KEY_UID, Integer.MIN_VALUE);
+        cid = SharedPreferenceUtils.getInteger(this, SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, Integer.MIN_VALUE);
+        if (uid < 0) {
+            return;
+        }
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("uid", String.valueOf(uid));
+        builder.add("cid", String.valueOf(cid));
+        JSONObject jsonObject = OkHttpUtils.postObj("http://101.133.173.40:8090/edusys/course/getUserCourseRelation", builder.build());
+        isJoin = jsonObject.getBoolean("flag");
     }
 }

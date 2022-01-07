@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MoseaClass" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="colorPrimary">@color/green</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
@@ -22,7 +22,7 @@
 
     <style name="Theme.MoseaClass.RatingBar" parent="Widget.AppCompat.RatingBar.Small">
         <!--        <item name="colorControlNormal">@color/gray_back</item>-->
-        <item name="colorControlActivated">@color/blue_primary</item>
+        <item name="colorControlActivated">#FF8233</item>
     </style>
 
     <style name="Theme.MoseaClass.LoginActivity.EditText" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">

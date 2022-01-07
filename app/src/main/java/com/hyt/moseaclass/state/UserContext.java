@@ -9,8 +9,9 @@ public class UserContext {
 
     public static final String KEY_LOGIN = "IsLogin";
     public static final String KEY_UID = "UID";
+    public static final String KEY_CID = "CID";
     private static final UserContext instance = new UserContext();
-    private UserState mState;
+    private UserState mState = new LogoutState();
 
     private Boolean isLogin = false;
 
@@ -18,6 +19,10 @@ public class UserContext {
 
     public static UserContext getInstance() {
         return instance;
+    }
+
+    public UserState getmState() {
+        return mState;
     }
 
     public Boolean getIsLogin(Context context) {
@@ -32,7 +37,6 @@ public class UserContext {
         SharedPreferenceUtils.setBoolean(context,SharedPreferenceUtils.LOGIN_STATE, KEY_LOGIN, true);
         SharedPreferenceUtils.setInteger(context,SharedPreferenceUtils.LOGIN_STATE,KEY_UID, uid);
         mState = new LoginState();
-        isLogin = true;
     }
 
     public void setLogoutState(Context context) {
