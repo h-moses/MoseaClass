@@ -51,6 +51,6 @@ public class CourseAlbumView extends LinearLayout {
     }
 
     public void setCourseAlbumData(List<CourseIntroduction> list) {
-        ViewUtils.initGridLayout(mContext, courseGrid, list.size() / 2 == 0 ? list.size() / 2 : list.size() / 2 + 1, 2, list);
+        ViewUtils.initGridLayout(mContext, courseGrid, list.size() % 2 == 0 ? list.size() / 2 : list.size() / 2 + 1, 2, list);
     }
 }

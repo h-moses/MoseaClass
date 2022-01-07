@@ -89,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:paddingHorizontal="@dimen/dp_16"
-        android:paddingBottom="@dimen/dp_16"
+        android:paddingVertical="@dimen/dp_8"
         android:background="@color/white"
         app:layout_anchor="@id/nested_scroll_view"
         app:layout_anchorGravity="bottom">

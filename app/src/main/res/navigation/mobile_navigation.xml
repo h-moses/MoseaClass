@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_trend"
-        android:name="com.hyt.moseaclass.ui.trend.TrendFragment"
+        android:name="com.hyt.moseaclass.ui.dynamic.DynamicFragment"
         android:label="@string/title_trend"
-        tools:layout="@layout/fragment_trend" />
+        tools:layout="@layout/fragment_dynamic" />
 
 
     <fragment

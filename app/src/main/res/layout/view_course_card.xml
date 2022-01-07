@@ -10,7 +10,7 @@
         android:id="@+id/course_card"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:cardCornerRadius="@dimen/dp_4"
+        app:cardCornerRadius="@dimen/dp_5"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true">
 
