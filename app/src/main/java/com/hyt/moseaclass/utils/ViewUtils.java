@@ -1,6 +1,7 @@
 package com.hyt.moseaclass.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.GridLayout;
 
 import com.hyt.moseaclass.components.CourseCardView;
@@ -22,8 +23,11 @@ public class ViewUtils {
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = GridLayout.LayoutParams.WRAP_CONTENT;
             params.height = GridLayout.LayoutParams.WRAP_CONTENT;
-            params.rowSpec = GridLayout.spec(i % rowCount, 1, 1f);
-            params.columnSpec = GridLayout.spec(i / rowCount, 1, 1f);
+            params.rowSpec = GridLayout.spec(i / colCount, 1, 1f);
+            params.columnSpec = GridLayout.spec(i % colCount, 1, 1f);
+            if (i % colCount == 1) {
+                params.leftMargin = 20;
+            }
             gridLayout.addView(courseCardView, params);
         }
     }

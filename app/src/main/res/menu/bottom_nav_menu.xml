@@ -12,6 +12,11 @@
         android:title="@string/title_course" />
 
     <item
+        android:id="@+id/navigation_trend"
+        android:icon="@drawable/ic_trends"
+        android:title="@string/title_trend" />
+
+    <item
         android:id="@+id/navigation_person"
         android:icon="@drawable/ic_person"
         android:title="@string/title_person" />

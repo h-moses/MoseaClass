@@ -18,6 +18,13 @@
         tools:layout="@layout/fragment_course" />
 
     <fragment
+        android:id="@+id/navigation_trend"
+        android:name="com.hyt.moseaclass.ui.trend.TrendFragment"
+        android:label="@string/title_trend"
+        tools:layout="@layout/fragment_trend" />
+
+
+    <fragment
         android:id="@+id/navigation_person"
         android:name="com.hyt.moseaclass.ui.person.PersonFragment"
         android:label="@string/title_person"

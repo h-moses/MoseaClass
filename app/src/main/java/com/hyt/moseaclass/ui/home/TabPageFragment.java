@@ -76,7 +76,7 @@ public class TabPageFragment extends Fragment {
         }
 
         JSONArray jsonArray = OkHttpUtils.get("http://101.133.173.40:8090/edusys/course/getAll");
-        for (int i = 0; i < result.length(); i++) {
+        for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             int cid = jsonObject.getInt("cid");
             String title = jsonObject.getString("title");
