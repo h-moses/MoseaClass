@@ -9,6 +9,8 @@ import com.hyt.moseaclass.data.AppDatabase;
 import com.hyt.moseaclass.data.dao.UserInfoDao;
 import com.hyt.moseaclass.data.entity.UserInfo;
 
+import java.util.concurrent.CountDownLatch;
+
 public class UserInfoRepository {
 
     private final UserInfoDao userInfoDao;
@@ -32,10 +34,18 @@ public class UserInfoRepository {
         return loginState;
     }
 
+    /*
+    * 同步查询
+    * */
     public LiveData<UserInfo> queryUserInfo(Integer uid) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            userInfoLiveData = this.userInfoDao.query(uid);
-        });
-        return userInfoLiveData;
+        CountDownLatch latch = new CountDownLatch(1);
+        LiveData<UserInfo> query = userInfoDao.query(uid);
+        latch.countDown();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return query;
     }
 }

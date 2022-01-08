@@ -12,13 +12,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.hyt.moseaclass.R;
 import com.hyt.moseaclass.components.courseModule.CommentFragment;
 import com.hyt.moseaclass.components.courseModule.CoursewareFragment;
-import com.hyt.moseaclass.components.courseModule.DiscussFragment;
+import com.hyt.moseaclass.components.courseModule.TestFragment;
 import com.hyt.moseaclass.components.courseModule.IntroductionFragment;
 
 public class CourseRelativityPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_introduction, R.string.tab_courseware, R.string.tab_comment, R.string.tab_discuss};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_introduction, R.string.tab_courseware, R.string.tab_comment, R.string.tab_test};
     private static final String TAG = CourseRelativityPagerAdapter.class.getSimpleName();
 
     private final Context mContext;
@@ -38,7 +38,7 @@ public class CourseRelativityPagerAdapter extends FragmentPagerAdapter {
         } else if (2 == position) {
             return new CommentFragment();
         } else if (3 == position) {
-            return new DiscussFragment();
+            return new TestFragment();
         } else {
             return new IntroductionFragment();
         }
