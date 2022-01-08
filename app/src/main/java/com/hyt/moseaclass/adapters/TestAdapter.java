@@ -1,8 +1,12 @@
 package com.hyt.moseaclass.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,6 +16,7 @@ import com.hyt.moseaclass.data.entity.TestQuestion;
 import com.hyt.moseaclass.data.entity.TestQuestionSet;
 import com.hyt.moseaclass.databinding.ItemTestBinding;
 import com.hyt.moseaclass.state.UserContext;
+import com.hyt.moseaclass.ui.course.AnswerActivity;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 
@@ -19,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.net.IDN;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -124,6 +130,24 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
         holder.getBinding().testTitle.setText(String.format(Locale.CHINA,TITLE_TEMPLATE,numberMap.get(questions.get(position).getId())));
         holder.getBinding().testDeadline.setText(DEADLINE_TEMPLATE);
         holder.getBinding().testScore.setText(String.format(Locale.CHINA,SCORE_TEMPLATE,scoreList.get(position)));
+        holder.getBinding().btnAccessTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(view.getContext()).setMessage("确认要进入答题？").setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(mContext, AnswerActivity.class);
+                        intent.putExtra("data", (Serializable) questions.get(position).getQuestionList());
+                        mContext.startActivity(intent);
+                    }
+                }).setNegativeButton("放弃", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).create().show();
+            }
+        });
     }
 
     @Override

@@ -2,10 +2,11 @@ package com.hyt.moseaclass.data.entity;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestQuestion {
+public class TestQuestion implements Serializable {
 
     private int id;
     private int score;

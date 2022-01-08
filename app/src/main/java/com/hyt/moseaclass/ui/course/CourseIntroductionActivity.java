@@ -6,11 +6,13 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -51,7 +53,6 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handleIntent();
-
         binding = ActivityCourseIntroductionBinding.inflate(LayoutInflater.from(this), null, false);
         setContentView(binding.getRoot());
         setSupportActionBar(binding.courseToolbar);
@@ -78,12 +79,15 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
         if (isJoin) {
             switchBtnState("退出学习",R.drawable.btn_quit_course);
         } else {
-            switchBtnState("加入学习",R.drawable.login_btn_back);
+            switchBtnState("加入学习", R.drawable.login_btn_back);
         }
 
-        Picasso.get().load(Uri.parse(introduction.getcImage())).into(binding.tbExpand.introductionImage);
-        binding.tbExpand.introductionName.setText(introduction.getcName());
-        binding.tbExpand.introductionDepart.setText(introduction.getcInstructor());
+        if (introduction != null) {
+            Picasso.get().load(Uri.parse(introduction.getcImage())).into(binding.tbExpand.introductionImage);
+            binding.tbExpand.introductionName.setText(introduction.getcName());
+            binding.tbExpand.introductionDepart.setText(introduction.getcInstructor());
+        }
+
         binding.introductionAppbar.addOnOffsetChangedListener(this);
 
         binding.btnJoin.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +107,7 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
             }
         });
     }
+
 
     private void switchBtnState(String text, int resId) {
         binding.btnJoin.setText(text);
