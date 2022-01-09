@@ -33,4 +33,7 @@
     <style name="Theme.MoseaClass.PersonFragment" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/black</item>
     </style>
+    <style name="Theme.MoseaClass.AnswerActivity" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorAccent">@color/green</item>
+    </style>
 </resources>

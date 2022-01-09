@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.course.VideoPlayerActivity" android:parentActivityName=".MainActivity" />
-        <activity android:name=".ui.course.AnswerActivity" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ui.course.AnswerActivity" android:parentActivityName=".MainActivity" android:theme="@style/Theme.MoseaClass.AnswerActivity"/>
     </application>
 
 </manifest>
