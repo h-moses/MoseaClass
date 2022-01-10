@@ -6,13 +6,11 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -24,7 +22,6 @@ import com.hyt.moseaclass.adapters.CourseRelativityPagerAdapter;
 import com.hyt.moseaclass.data.entity.CourseIntroduction;
 import com.hyt.moseaclass.databinding.ActivityCourseIntroductionBinding;
 import com.hyt.moseaclass.state.UserContext;
-import com.hyt.moseaclass.state.UserState;
 import com.hyt.moseaclass.utils.OkHttpUtils;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;
@@ -47,7 +44,8 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     private int cid;
     private int uid;
 
-    public CourseIntroductionActivity() {}
+    public CourseIntroductionActivity() {
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +75,7 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
             e.printStackTrace();
         }
         if (isJoin) {
-            switchBtnState("退出学习",R.drawable.btn_quit_course);
+            switchBtnState("退出学习", R.drawable.btn_quit_course);
         } else {
             switchBtnState("加入学习", R.drawable.login_btn_back);
         }
@@ -94,14 +92,14 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
             @Override
             public void onClick(View view) {
                 if (!UserContext.getInstance().getIsLogin(getApplicationContext())) {
-                    Toast.makeText(getApplicationContext(),"用户未登录，无法加入课程！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "用户未登录，无法加入课程！", Toast.LENGTH_SHORT).show();
                 } else {
                     if (isJoin) {
                         UserContext.getInstance().getmState().quitCourse(getApplicationContext(), uid, cid);
 //                        switchBtnState("加入学习",R.drawable.login_btn_back);
                     } else {
                         UserContext.getInstance().getmState().joinCourse(getApplicationContext(), uid, cid);
-                        switchBtnState("退出学习",R.drawable.btn_quit_course);
+                        switchBtnState("退出学习", R.drawable.btn_quit_course);
                     }
                 }
             }
@@ -117,7 +115,7 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     private void handleIntent() {
         Bundle data = getIntent().getBundleExtra("data");
         if (data != null) {
-            introduction = new CourseIntroduction(data.getInt("cid"), data.getString("title"),data.getString("cover"),data.getString("uName"),data.getString("desc"));
+            introduction = new CourseIntroduction(data.getInt("cid"), data.getString("title"), data.getString("cover"), data.getString("uName"), data.getString("desc"));
         }
     }
 
@@ -160,5 +158,6 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
         builder.add("cid", String.valueOf(cid));
         JSONObject jsonObject = OkHttpUtils.postObj("http://101.133.173.40:8090/edusys/course/getUserCourseRelation", builder.build());
         isJoin = jsonObject.getBoolean("flag");
+        SharedPreferenceUtils.setBoolean(this,SharedPreferenceUtils.COURSE_FILE,UserContext.KEY_JOIN,isJoin);
     }
 }

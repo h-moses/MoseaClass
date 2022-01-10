@@ -66,9 +66,9 @@ public class CourseCardView extends RelativeLayout implements View.OnClickListen
         bundle.putString("desc", introduction.getcDesc());
         SharedPreferenceUtils.clear(getContext(), SharedPreferenceUtils.COURSE_FILE);
         SharedPreferenceUtils.setInteger(getContext(), SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, introduction.getCid());
-        SharedPreferenceUtils.setString(getContext(),SharedPreferenceUtils.COURSE_FILE, "title", introduction.getcName());
-        SharedPreferenceUtils.setString(getContext(),SharedPreferenceUtils.COURSE_FILE, "desc", introduction.getcDesc());
-        intent.putExtra("data",bundle);
+        SharedPreferenceUtils.setString(getContext(), SharedPreferenceUtils.COURSE_FILE, "title", introduction.getcName());
+        SharedPreferenceUtils.setString(getContext(), SharedPreferenceUtils.COURSE_FILE, "desc", introduction.getcDesc());
+        intent.putExtra("data", bundle);
         mContext.startActivity(intent);
     }
 }

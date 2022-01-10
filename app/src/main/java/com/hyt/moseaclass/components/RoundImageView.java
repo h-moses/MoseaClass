@@ -37,12 +37,17 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
      * @return 位图
      */
     public static Bitmap getBitmapFromDrawable(Drawable drawable) {
+//        得到依赖于设备dpi的图片宽高
         int width = drawable.getIntrinsicWidth();
         int height = drawable.getIntrinsicHeight();
+//        创建位图
+//        若支持透明，则使用ARGB_8888，否则使用RGB_565
         Bitmap bitmap = Bitmap.createBitmap(width, height, drawable
                 .getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
                 : Bitmap.Config.RGB_565);
+//        bitmap存储绘制像素，即画布绘制图像，是绘制在底层的bitmap上
         Canvas canvas = new Canvas(bitmap);
+//        将自身绘制在画布上
         drawable.draw(canvas);
         return bitmap;
     }
@@ -51,11 +56,14 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
         if (bitmap == null) {
             return null;
         }
+//        在该设备上的显示大小，经过之前的依赖于设备的方法调用，已成功转换
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
+//        缩放系数
         float widthScale = outWidth * 1f / width;
         float heightScale = outHeight * 1f / height;
 
+//        设置缩放比
         Matrix matrix = new Matrix();
         matrix.setScale(widthScale, heightScale);
         //创建输出的bitmap
@@ -63,7 +71,7 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
         //创建canvas并传入desBitmap，这样绘制的内容都会在desBitmap上
         Canvas canvas = new Canvas(desBitmap);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        //创建着色器
+        //创建着色器，如果着色器超出原始边界范围，会复制边缘颜色。
         BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
         //给着色器配置matrix
         bitmapShader.setLocalMatrix(matrix);
@@ -78,8 +86,6 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
 
     /**
      * 绘制圆角矩形图片
-     *
-     * @author caizhiming
      */
     @Override
     protected void onDraw(Canvas canvas) {
@@ -87,9 +93,11 @@ public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView
         if (null != drawable) {
             Bitmap bitmap = getBitmapFromDrawable(drawable);
             Bitmap b = getRoundBitmapByShader(bitmap, getWidth(), getHeight(), 15);
+//            同样大小
             final Rect rectSrc = new Rect(0, 0, b.getWidth(), b.getHeight());
             final Rect rectDest = new Rect(0, 0, getWidth(), getHeight());
             paint.reset();
+//            第一个是绘制大小，第二个绘制区域
             canvas.drawBitmap(b, rectSrc, rectDest, paint);
         } else {
             super.onDraw(canvas);

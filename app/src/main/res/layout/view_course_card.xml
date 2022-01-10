@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dp_10"
     android:clickable="true">
@@ -10,6 +10,7 @@
         android:id="@+id/course_card"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_centerInParent="true"
         app:cardCornerRadius="@dimen/dp_5"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true">
@@ -31,8 +32,8 @@
                 android:id="@+id/course_title"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginHorizontal="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_5"
                 android:layout_weight="1"
                 android:maxLines="2"
                 android:textColor="@color/black"
@@ -43,9 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/dp_5"
-                android:paddingBottom="@dimen/dp_5"
                 android:layout_weight="1"
                 android:gravity="bottom|start"
+                android:paddingBottom="@dimen/dp_5"
                 android:textColor="@color/gray_text"
                 android:textSize="12sp" />
 

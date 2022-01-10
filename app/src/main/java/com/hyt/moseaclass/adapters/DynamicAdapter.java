@@ -1,11 +1,7 @@
 package com.hyt.moseaclass.adapters;
 
 import android.content.Context;
-import android.media.Image;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -13,7 +9,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hyt.moseaclass.components.RoundImageView;
 import com.hyt.moseaclass.data.entity.DynamicInfo;
 import com.hyt.moseaclass.databinding.ItemDynamicBinding;
 import com.hyt.moseaclass.utils.OkHttpUtils;
@@ -30,8 +25,8 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.ViewHold
 
     private static final String TAG = DynamicAdapter.class.getSimpleName();
     private final Context mContext;
-    private ItemDynamicBinding binding;
     private final List<DynamicInfo> dynamicInfoList = new ArrayList<>();
+    private ItemDynamicBinding binding;
 
     public DynamicAdapter(Context mContext) {
         this.mContext = mContext;
@@ -60,7 +55,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.ViewHold
             for (int j = 0; j < imgs.length(); j++) {
                 list.add(imgs.getString(j));
             }
-            DynamicInfo dynamicInfo = new DynamicInfo(id, publisher,avatar,group,content,create_time,list);
+            DynamicInfo dynamicInfo = new DynamicInfo(id, publisher, avatar, group, content, create_time, list);
             dynamicInfoList.add(dynamicInfo);
         }
     }

@@ -62,7 +62,7 @@ public class CourseFragment extends Fragment {
         learningCourseList = new ArrayList<>();
         LearningCourse learningCourse = null;
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("uid", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(),SharedPreferenceUtils.LOGIN_STATE, UserContext.KEY_UID,Integer.MIN_VALUE)));
+        builder.add("uid", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(), SharedPreferenceUtils.LOGIN_STATE, UserContext.KEY_UID, Integer.MIN_VALUE)));
         JSONArray array = OkHttpUtils.post("http://101.133.173.40:8090/edusys/course/getLearntCourse?", builder.build());
         Log.e(TAG, "initData: " + array.length());
         for (int i = 0; i < array.length(); i++) {

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +35,10 @@ import okhttp3.FormBody;
 
 public class CoursewareFragment extends Fragment {
 
-    private FragmentCoursewareBinding binding;
-
     private final Context mContext;
     private final List<CourseChapter> chapterList = new ArrayList<>();
     private final List<List<CourseSection>> sectionList = new ArrayList<>();
+    private FragmentCoursewareBinding binding;
 
     public CoursewareFragment(Context mContext) {
         this.mContext = mContext;
@@ -66,7 +64,7 @@ public class CoursewareFragment extends Fragment {
 
     private void initData() throws JSONException {
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("id", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(),SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, Integer.MIN_VALUE)));
+        builder.add("id", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(), SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, Integer.MIN_VALUE)));
         JSONArray jsonArray = OkHttpUtils.post("http://101.133.173.40:8090/edusys/course/getCourseCatalogue?", builder.build());
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -175,7 +173,7 @@ public class CoursewareFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(parent.getContext(), VideoPlayerActivity.class);
-                        intent.putExtra("video_url",sectionList.get(groupPosition).get(childPosition).getsUrl());
+                        intent.putExtra("video_url", sectionList.get(groupPosition).get(childPosition).getsUrl());
                         context.startActivity(intent);
                     }
                 });

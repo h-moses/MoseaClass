@@ -9,11 +9,11 @@
         android:id="@+id/question_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_16"
         android:textColor="@color/black"
+        android:textSize="@dimen/sp_16"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <RadioGroup
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question_title"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

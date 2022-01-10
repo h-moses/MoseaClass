@@ -16,4 +16,6 @@
     <string name="tab_test">测试</string>
     <string name="banner_desc">轮播图</string>
     <string name="title_trend">社区</string>
+    <string name="channel_name">运行通道</string>
+    <string name="channel_description">发送运行通知</string>
 </resources>

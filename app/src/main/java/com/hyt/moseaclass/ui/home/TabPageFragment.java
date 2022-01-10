@@ -2,7 +2,6 @@ package com.hyt.moseaclass.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +9,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.hyt.moseaclass.adapters.ShowCourseAdapter;
 import com.hyt.moseaclass.components.BannerView;
-import com.hyt.moseaclass.components.CourseAlbumView;
-import com.hyt.moseaclass.components.indicator.CircleIndicator;
 import com.hyt.moseaclass.data.entity.CourseIntroduction;
 import com.hyt.moseaclass.databinding.FragmentTabBinding;
 import com.hyt.moseaclass.utils.OkHttpUtils;
@@ -36,7 +35,6 @@ public class TabPageFragment extends Fragment {
     private FragmentTabBinding binding;
     private String tabTitle;
     private BannerView bannerView;
-    private CourseAlbumView courseAlbum;
 
     public TabPageFragment(Context context, int tabTitle) {
         this.mContext = context;
@@ -59,10 +57,9 @@ public class TabPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentTabBinding.inflate(inflater, container, false);
         bannerView = binding.advertisingBanner;
-        bannerView.setIndicator(new CircleIndicator(getContext()));
-        courseAlbum = binding.courseAlbum;
         bannerView.setBannerData(bannerImages);
-        courseAlbum.setCourseAlbumData(courseIntroductions);
+        binding.courseList.setLayoutManager(new GridLayoutManager(requireContext(),2,GridLayoutManager.VERTICAL,false));
+        binding.courseList.setAdapter(new ShowCourseAdapter(requireContext(),courseIntroductions));
         return binding.getRoot();
     }
 

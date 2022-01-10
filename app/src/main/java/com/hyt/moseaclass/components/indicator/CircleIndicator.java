@@ -38,7 +38,7 @@ public class CircleIndicator extends BaseIndicator {
 
         @Override
         public void select() {
-            mPaint.setColor(Color.parseColor("#1966ff"));
+            mPaint.setColor(Color.parseColor("#00CC7E"));
         }
 
         @Override

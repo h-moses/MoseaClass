@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/gray_back"
     android:orientation="vertical"
-    android:layout_marginBottom="@dimen/dp_56"
     tools:context=".ui.home.TabPageFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="110dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <com.hyt.moseaclass.components.BannerView
@@ -25,12 +25,14 @@
                 app:banner_auto_scroll="true"
                 app:banner_page_margin="16dp"
                 app:banner_radius="15sp"
-                app:banner_toggle_duration="1800" />
+                app:banner_toggle_duration="3000" />
 
-            <com.hyt.moseaclass.components.CourseAlbumView
-                android:id="@+id/course_album"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/course_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingVertical="@dimen/dp_16"
                 android:layout_marginHorizontal="@dimen/dp_16" />
 
         </LinearLayout>

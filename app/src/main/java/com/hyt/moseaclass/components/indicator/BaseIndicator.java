@@ -57,7 +57,7 @@ public abstract class BaseIndicator extends LinearLayout implements Indicator {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         // 重新测量当前界面的宽度
-        float width = getPaddingLeft() + getPaddingRight() + getCellMargin() * mCellCount + getCellMargin() * (mCellCount - 1);
+        float width = getPaddingLeft() + getPaddingRight() + getCellWidth() * mCellCount + getCellMargin() * (mCellCount - 1);
         float height = getPaddingTop() + getPaddingBottom() + getCellWidth();
         width = resolveSize((int) width, widthMeasureSpec);
         height = resolveSize((int) height, heightMeasureSpec);
@@ -74,7 +74,6 @@ public abstract class BaseIndicator extends LinearLayout implements Indicator {
         for (int i = 0; i < mCellCount; i++) {
             IndicatorCell view = mCellViews.get(i);
             float left = i * getCellWidth() + getCellMargin() * i;
-            //float right = (i + 1) * getCellWidth() + getCellMargin() * i;
             view.setLeft((int) left);
             view.setTop(getHeight() / 2 - (int) getCellWidth() / 2);
             view.getLayoutParams().width = (int) getCellWidth();

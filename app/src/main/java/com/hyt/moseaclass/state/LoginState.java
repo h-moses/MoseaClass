@@ -4,14 +4,14 @@ import android.content.Context;
 
 import com.hyt.moseaclass.utils.OkHttpUtils;
 
-import org.json.JSONObject;
-
 import okhttp3.FormBody;
 
 public class LoginState implements UserState {
 
     @Override
-    public void login(Context context) {}
+    public void login(Context context) {
+        // TODO，无需实现任何操作
+    }
 
     @Override
     public void joinCourse(Context context, int uid, int cid) {
@@ -23,6 +23,6 @@ public class LoginState implements UserState {
 
     @Override
     public void quitCourse(Context context, int uid, int cid) {
-
+        // TODO,接口未给
     }
 }

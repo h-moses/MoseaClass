@@ -12,8 +12,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.hyt.moseaclass.R;
 import com.hyt.moseaclass.components.courseModule.CommentFragment;
 import com.hyt.moseaclass.components.courseModule.CoursewareFragment;
-import com.hyt.moseaclass.components.courseModule.TestFragment;
 import com.hyt.moseaclass.components.courseModule.IntroductionFragment;
+import com.hyt.moseaclass.components.courseModule.TestFragment;
 
 public class CourseRelativityPagerAdapter extends FragmentPagerAdapter {
 

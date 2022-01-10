@@ -32,11 +32,6 @@ public class BannerView extends FrameLayout {
     //触发轮播的消息标志位
     private final int PLAY = 0x123;
     /**
-     * 滚动监听回调接口
-     */
-
-    ScrollPageListener mScrollPageListener;
-    /**
      * 轮播图ViewPager
      */
     private ViewPager mBannerViewPager;
@@ -110,9 +105,6 @@ public class BannerView extends FrameLayout {
             setScrollPosition(position);
             int smallPos = position % mBannerUrlList.size();
             mIndicator.setCurrentPosition(smallPos);
-            if (mScrollPageListener != null) {
-                mScrollPageListener.onPageSelected(smallPos);
-            }
         }
 
         @Override
@@ -146,6 +138,7 @@ public class BannerView extends FrameLayout {
     private void handleStyleable(Context context, AttributeSet attrs, int defStyle) {
         TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.BannerView, defStyle, 0);
         try {
+//            获取可编辑样式数据
             mIsAutoScroll = ta.getBoolean(R.styleable.BannerView_banner_auto_scroll, true);
             mPageMargin = ta.getDimensionPixelSize(R.styleable.BannerView_banner_page_margin, 0);
             mDelayTime = ta.getInteger(R.styleable.BannerView_banner_toggle_duration, 3000);
@@ -170,6 +163,7 @@ public class BannerView extends FrameLayout {
         mBannerViewPager = new ViewPager(context, attrs);
         LayoutParams bannerParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         if (mIsMargin) {
+//            设置边距
             bannerParams.setMargins(mPageMargin, dp2px(16), mPageMargin, dp2px(16));
         }
         addView(mBannerViewPager, bannerParams);
@@ -177,10 +171,14 @@ public class BannerView extends FrameLayout {
         mBannerUrlList = new ArrayList<>();
         mAdapter = new InnerPagerAdapter();
         mBannerViewPager.setAdapter(mAdapter);
+//        实现初始左滑动
         mBannerViewPager.setCurrentItem(Integer.MAX_VALUE / 2);
         if (mIsMargin) {
+//            设置当前页的任意一侧应该保留的页面数量
             mBannerViewPager.setOffscreenPageLimit(5);
+//            页面之间的边距为外边距的一半，这样左右显示预览的一部分
             mBannerViewPager.setPageMargin(mPageMargin / 2);
+//            子view可以超过父view
             mBannerViewPager.setClipChildren(false);
         }
     }
@@ -197,25 +195,17 @@ public class BannerView extends FrameLayout {
         addView(mIndicator, indicatorParams);
     }
 
-    public void setIndicator(BaseIndicator indicator) {
-        removeView(mIndicator);
-        mIndicator = indicator;
-        LayoutParams indicatorParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp2px(60));
-        indicatorParams.gravity = BOTTOM | CENTER_HORIZONTAL;
-        addView(mIndicator, indicatorParams);
-        invalidate();
-    }
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int height = 0;
+        int height;
         int hMode = MeasureSpec.getMode(heightMeasureSpec);
         int hSize = MeasureSpec.getSize(heightMeasureSpec);
-        if (hMode == MeasureSpec.UNSPECIFIED || hMode == MeasureSpec.AT_MOST) {
+        if (hMode == MeasureSpec.UNSPECIFIED || hMode == MeasureSpec.AT_MOST) { // 未明确或最大限制
             height = dp2px(200);
-        } else {
+        } else { // 精确设置
             height = hSize;
         }
+//        修改为精确设置
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(height,
                 MeasureSpec.EXACTLY);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -229,6 +219,7 @@ public class BannerView extends FrameLayout {
     public void setBannerData(List<String> bannerData) {
         mBannerUrlList.clear();
         mBannerUrlList.addAll(bannerData);
+//        通知数据集变化
         mAdapter.notifyDataSetChanged();
         startPlay(mDelayTime);
         mIndicator.setCellCount(bannerData.size());
@@ -263,15 +254,16 @@ public class BannerView extends FrameLayout {
      * @param state
      */
     private void onPageScrollStateChange(int state) {
-        if (!mIsAutoScroll) {
+        if (!mIsAutoScroll) { // 没有自动滑动
             return;
         }
         switch (state) {
-            case ViewPager.SCROLL_STATE_IDLE:
+            case ViewPager.SCROLL_STATE_IDLE: // 空闲
                 if (!mGestureScroll) {
                     return;
                 }
                 mGestureScroll = false;
+//                重新开始发生消息
                 mHandler.removeMessages(PLAY);
                 mHandler.sendEmptyMessageDelayed(PLAY, 100);
                 break;
@@ -301,24 +293,6 @@ public class BannerView extends FrameLayout {
     }
 
     /**
-     * 设置是否自动轮播
-     *
-     * @param isAuto
-     */
-    public void setAutoScrollEnable(boolean isAuto) {
-        mIsAutoScroll = isAuto;
-    }
-
-    /**
-     * 设置是否显示指示器
-     *
-     * @param flag
-     */
-    public void setHasIndicator(boolean flag) {
-        mIndicator.setVisibility(flag ? VISIBLE : GONE);
-    }
-
-    /**
      * dp转px
      *
      * @param dpVal dp value
@@ -327,14 +301,6 @@ public class BannerView extends FrameLayout {
     public int dp2px(float dpVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal,
                 getContext().getResources().getDisplayMetrics());
-    }
-
-    public void setScrollPageListener(ScrollPageListener mScrollPageListener) {
-        this.mScrollPageListener = mScrollPageListener;
-    }
-
-    public interface ScrollPageListener {
-        void onPageSelected(int position);
     }
 
     /**

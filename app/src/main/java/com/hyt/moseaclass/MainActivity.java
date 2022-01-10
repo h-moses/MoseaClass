@@ -1,5 +1,6 @@
 package com.hyt.moseaclass;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hyt.moseaclass.service.RunTimeService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         assert navHostFragment != null;
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(navView, navController);
+        Intent intent = new Intent(this, RunTimeService.class);
+        startForegroundService(intent);
     }
 
 }

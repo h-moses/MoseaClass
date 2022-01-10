@@ -2,7 +2,6 @@ package com.hyt.moseaclass.data.repository;
 
 import android.app.Application;
 
-import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 
 import com.hyt.moseaclass.data.AppDatabase;
@@ -35,8 +34,8 @@ public class UserInfoRepository {
     }
 
     /*
-    * 同步查询
-    * */
+     * 同步查询
+     * */
     public LiveData<UserInfo> queryUserInfo(Integer uid) {
         CountDownLatch latch = new CountDownLatch(1);
         LiveData<UserInfo> query = userInfoDao.query(uid);

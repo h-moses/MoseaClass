@@ -12,9 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.hyt.moseaclass.adapters.DynamicAdapter;
 import com.hyt.moseaclass.databinding.FragmentDynamicBinding;
-import com.hyt.moseaclass.utils.OkHttpUtils;
-
-import org.json.JSONArray;
 
 public class DynamicFragment extends Fragment {
 

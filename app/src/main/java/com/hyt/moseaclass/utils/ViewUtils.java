@@ -1,7 +1,6 @@
 package com.hyt.moseaclass.utils;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.GridLayout;
 
 import com.hyt.moseaclass.components.CourseCardView;

@@ -19,6 +19,7 @@ import com.hyt.moseaclass.data.entity.TestQuestion;
 import com.hyt.moseaclass.databinding.ActivityAnswerBinding;
 
 import java.util.List;
+import java.util.Objects;
 
 public class AnswerActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class AnswerActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.answerToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         handleIntent();
@@ -43,17 +44,22 @@ public class AnswerActivity extends AppCompatActivity {
         binding.answerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.answerRecyclerView.setAdapter(answerAdapter);
 
+//        提交按钮添加点击事件
         binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                获取答题总分
                 int score = answerAdapter.calcScore();
+//                构建显示对话框
                 new AlertDialog.Builder(view.getContext()).setTitle("测试得分").setMessage("恭喜你，本次测试得分为".concat(String.valueOf(score))).setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                     }
                 }).create().show();
+//                不可再次提交
                 binding.btnSubmit.setEnabled(false);
+//                修改按钮样式
                 binding.btnSubmit.setText("已提交");
                 binding.btnSubmit.setTextColor(view.getResources().getColor(R.color.gray_text));
                 binding.btnSubmit.setBackgroundColor(view.getResources().getColor(R.color.gray_back));
@@ -64,6 +70,7 @@ public class AnswerActivity extends AppCompatActivity {
     private void handleIntent() {
         questionList = (List<TestQuestion>) getIntent().getSerializableExtra("data");
     }
+
     /*
      * 根据状态栏的展开折叠修改返回按钮的颜色
      * */

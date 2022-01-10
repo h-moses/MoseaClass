@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,13 +47,13 @@ public class CourseLearningAdapter extends RecyclerView.Adapter<CourseLearningAd
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                SharedPreferenceUtils.clear(mContext,SharedPreferenceUtils.COURSE_FILE);
-                SharedPreferenceUtils.setInteger(mContext,SharedPreferenceUtils.COURSE_FILE,"id", learningCourseList.get(position).getId());
-                SharedPreferenceUtils.setInteger(mContext,SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, learningCourseList.get(position).getCid());
-                SharedPreferenceUtils.setInteger(mContext,SharedPreferenceUtils.COURSE_FILE,"catalogue_id",learningCourseList.get(position).getCatalogueId());
-                SharedPreferenceUtils.setInteger(mContext,SharedPreferenceUtils.COURSE_FILE,"order_id",learningCourseList.get(position).getOrderId());
-                SharedPreferenceUtils.setString(mContext,SharedPreferenceUtils.COURSE_FILE,"title", learningCourseList.get(position).getcName());
-                SharedPreferenceUtils.setString(mContext,SharedPreferenceUtils.COURSE_FILE,"desc", learningCourseList.get(position).getcDesc());
+                SharedPreferenceUtils.clear(mContext, SharedPreferenceUtils.COURSE_FILE);
+                SharedPreferenceUtils.setInteger(mContext, SharedPreferenceUtils.COURSE_FILE, "id", learningCourseList.get(position).getId());
+                SharedPreferenceUtils.setInteger(mContext, SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, learningCourseList.get(position).getCid());
+                SharedPreferenceUtils.setInteger(mContext, SharedPreferenceUtils.COURSE_FILE, "catalogue_id", learningCourseList.get(position).getCatalogueId());
+                SharedPreferenceUtils.setInteger(mContext, SharedPreferenceUtils.COURSE_FILE, "order_id", learningCourseList.get(position).getOrderId());
+                SharedPreferenceUtils.setString(mContext, SharedPreferenceUtils.COURSE_FILE, "title", learningCourseList.get(position).getcName());
+                SharedPreferenceUtils.setString(mContext, SharedPreferenceUtils.COURSE_FILE, "desc", learningCourseList.get(position).getcDesc());
                 bundle.putInt("cid", learningCourseList.get(position).getCid());
                 bundle.putString("title", learningCourseList.get(position).getcName());
                 bundle.putString("cover", learningCourseList.get(position).getcCover());

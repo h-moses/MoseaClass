@@ -4,10 +4,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.net.IDN;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,15 +35,21 @@ import okhttp3.FormBody;
 
 public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
 
+//    总分模板
     private static final String SCORE_TEMPLATE = "总分%d";
+//    标题模板
     private static final String TITLE_TEMPLATE = "第%s章测验";
+//    时间模板
     private static final String DEADLINE_TEMPLATE = "提交截止 2022-02-27 23:00";
     private static final String TAG = TestAdapter.class.getSimpleName();
 
 
     private final Context mContext;
+//    所有章节的总分数组
     private final List<Integer> scoreList = new ArrayList<>();
+//    所有章节的信息和题目实体数组
     private final List<TestQuestionSet> questions = new ArrayList<>();
+//    章节匹配字典
     private final Map<Integer, String> numberMap = new HashMap<>();
 
     public TestAdapter(Context mContext) {
@@ -56,9 +61,12 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
         }
     }
 
+    /*
+    * 异步请求获取数据，并解析数据
+    * */
     private void initData() throws JSONException {
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("id", String.valueOf(SharedPreferenceUtils.getInteger(mContext,SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID,Integer.MIN_VALUE)));
+        builder.add("id", String.valueOf(SharedPreferenceUtils.getInteger(mContext, SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, Integer.MIN_VALUE)));
         JSONArray array = OkHttpUtils.post("http://101.133.173.40:8090/edusys/course/getCourseTest", builder.build());
         for (int i = 0; i < array.length(); i++) {
             TestQuestionSet questionSet = null;
@@ -103,7 +111,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
                     List<String> options = new ArrayList<>();
                     options.add("正确");
                     options.add("错误");
-                    testQuestion = new TestQuestion(id1, score,question_type, question, answer, options);
+                    testQuestion = new TestQuestion(id1, score, question_type, question, answer, options);
                     questionList.add(testQuestion);
                 }
                 questionSet = new TestQuestionSet(id, title, questionList);
@@ -112,10 +120,10 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
             questions.add(questionSet);
         }
 
-        numberMap.put(1,"一");
-        numberMap.put(2,"二");
-        numberMap.put(3,"三");
-        numberMap.put(4,"四");
+        numberMap.put(1, "一");
+        numberMap.put(2, "二");
+        numberMap.put(3, "三");
+        numberMap.put(4, "四");
     }
 
     @NonNull
@@ -127,25 +135,37 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.getBinding().testTitle.setText(String.format(Locale.CHINA,TITLE_TEMPLATE,numberMap.get(questions.get(position).getId())));
+//        根据模板和数据显示对应标题信息
+        holder.getBinding().testTitle.setText(String.format(Locale.CHINA, TITLE_TEMPLATE, numberMap.get(questions.get(position).getId())));
         holder.getBinding().testDeadline.setText(DEADLINE_TEMPLATE);
-        holder.getBinding().testScore.setText(String.format(Locale.CHINA,SCORE_TEMPLATE,scoreList.get(position)));
+//        根据模板和数据显示总分信息
+        holder.getBinding().testScore.setText(String.format(Locale.CHINA, SCORE_TEMPLATE, scoreList.get(position)));
+//        按钮添加点击监听器
         holder.getBinding().btnAccessTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(view.getContext()).setMessage("确认要进入答题？").setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(mContext, AnswerActivity.class);
-                        intent.putExtra("data", (Serializable) questions.get(position).getQuestionList());
-                        mContext.startActivity(intent);
-                    }
-                }).setNegativeButton("放弃", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                if (UserContext.getInstance().getIsLogin(view.getContext())) { // 若用户已登录
+                    if (SharedPreferenceUtils.getBoolean(view.getContext(),SharedPreferenceUtils.COURSE_FILE,UserContext.KEY_JOIN,false)) { // 若用户已参与该课程
+//                        显示确认对话框，是否进入答题界面
+                        new AlertDialog.Builder(view.getContext()).setMessage("确认要进入答题？").setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(mContext, AnswerActivity.class);
+                                intent.putExtra("data", (Serializable) questions.get(position).getQuestionList());
+                                mContext.startActivity(intent);
+                            }
+                        }).setNegativeButton("放弃", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
+                            }
+                        }).create().show();
+                    } else { // 若用户没有参与课程
+                        Toast.makeText(view.getContext(),"用户未加入该课程，无法进入测验！",Toast.LENGTH_SHORT).show();
                     }
-                }).create().show();
+                } else { // 若用户没有登录
+                    Toast.makeText(view.getContext(),"用户未登录，无法进入测验！",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

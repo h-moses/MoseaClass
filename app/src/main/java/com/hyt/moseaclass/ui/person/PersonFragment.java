@@ -5,17 +5,14 @@ import android.animation.StateListAnimator;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.ObservableField;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -27,8 +24,6 @@ import com.hyt.moseaclass.state.UserContext;
 import com.hyt.moseaclass.ui.login.LoginActivity;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;
-
-import java.util.Objects;
 
 public class PersonFragment extends Fragment {
 
@@ -50,7 +45,7 @@ public class PersonFragment extends Fragment {
         binding.profileName.setText("立即登录");
         Picasso.get().load(Uri.parse("http://edu-image.nosdn.127.net/6e66dbdc55464a44889c6a25428b2b4b.png?imageView&quality=100")).into(binding.profileAvatar);
 
-         UserInfoViewModel viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(UserInfoViewModel.class);
+        UserInfoViewModel viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(UserInfoViewModel.class);
         if (UserContext.getInstance().getIsLogin(requireContext())) {
             LiveData<UserInfo> userInfoLiveData = viewModel.getUserInfoLiveData(SharedPreferenceUtils.getInteger(requireContext(), SharedPreferenceUtils.LOGIN_STATE, UserContext.KEY_UID, 0));
             if (userInfoLiveData != null) {
@@ -62,11 +57,16 @@ public class PersonFragment extends Fragment {
                     binding.profileName.setText(userInfo.getUName());
                 });
             }
+        } else {
+            binding.btnLogout.setVisibility(View.GONE);
+            binding.profileLearningTime.setVisibility(View.GONE);
         }
         binding.btnLogout.setOnClickListener(view -> {
             UserContext.getInstance().setLogoutState(requireContext());
             binding.profileName.setText("立即登录");
+            binding.profileLearningTime.setVisibility(View.GONE);
             Picasso.get().load(Uri.parse("http://edu-image.nosdn.127.net/6e66dbdc55464a44889c6a25428b2b4b.png?imageView&quality=100")).into(binding.profileAvatar);
+            binding.btnLogout.setVisibility(View.GONE);
         });
 
         binding.profileCard.setOnClickListener(new View.OnClickListener() {

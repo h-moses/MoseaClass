@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
     android:background="@color/white"
-    android:padding="@dimen/dp_10"
-    android:layout_marginBottom="@dimen/dp_10">
+    android:padding="@dimen/dp_10">
 
     <com.hyt.moseaclass.components.RoundImageView
         android:id="@+id/dynamic_avatar"
@@ -18,9 +18,9 @@
         android:id="@+id/dynamic_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_14"
-        android:textColor="@color/black"
         android:layout_marginStart="@dimen/dp_10"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_14"
         app:layout_constraintLeft_toRightOf="@id/dynamic_avatar"
         app:layout_constraintTop_toTopOf="@id/dynamic_avatar" />
 
@@ -28,19 +28,19 @@
         android:id="@+id/dynamic_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_12"
-        android:textColor="@color/gray_text"
         android:layout_marginTop="@dimen/dp_10"
-        app:layout_constraintLeft_toLeftOf="@id/dynamic_username"
-        app:layout_constraintBottom_toBottomOf="@id/dynamic_avatar" />
+        android:textColor="@color/gray_text"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@id/dynamic_avatar"
+        app:layout_constraintLeft_toLeftOf="@id/dynamic_username" />
 
     <TextView
         android:id="@+id/dynamic_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_12"
-        android:textColor="@color/gray_text"
         android:layout_marginStart="@dimen/dp_10"
+        android:textColor="@color/gray_text"
+        android:textSize="@dimen/sp_12"
         app:layout_constraintLeft_toRightOf="@id/dynamic_time"
         app:layout_constraintTop_toTopOf="@id/dynamic_time" />
 
@@ -49,18 +49,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
-        app:layout_constraintLeft_toLeftOf="@id/dynamic_avatar"
-        app:layout_constraintTop_toBottomOf="@id/dynamic_avatar"
+        android:textColor="@color/black"
         android:textSize="@dimen/sp_14"
-        android:textColor="@color/black" />
+        app:layout_constraintLeft_toLeftOf="@id/dynamic_avatar"
+        app:layout_constraintTop_toBottomOf="@id/dynamic_avatar" />
 
     <GridLayout
         android:id="@+id/dynamic_image_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_10"
         android:alignmentMode="alignBounds"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginVertical="@dimen/dp_10"
         app:layout_constraintTop_toBottomOf="@id/dynamic_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

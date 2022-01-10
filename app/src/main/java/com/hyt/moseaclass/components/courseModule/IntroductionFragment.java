@@ -20,8 +20,8 @@ public class IntroductionFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentIntroductionBinding.inflate(inflater, container, false);
-        binding.tvIntroductionName.setText(SharedPreferenceUtils.getString(requireContext(),SharedPreferenceUtils.COURSE_FILE, "title", ""));
-        binding.tvIntroductionDesc.setText(SharedPreferenceUtils.getString(requireContext(),SharedPreferenceUtils.COURSE_FILE, "desc", ""));
+        binding.tvIntroductionName.setText(SharedPreferenceUtils.getString(requireContext(), SharedPreferenceUtils.COURSE_FILE, "title", ""));
+        binding.tvIntroductionDesc.setText(SharedPreferenceUtils.getString(requireContext(), SharedPreferenceUtils.COURSE_FILE, "desc", ""));
         return binding.getRoot();
     }
 }
