@@ -18,7 +18,7 @@ import com.hyt.moseaclass.ui.course.CourseIntroductionActivity;
 import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 import com.squareup.picasso.Picasso;
 
-public class CourseCardView extends RelativeLayout implements View.OnClickListener {
+public class CourseCardView extends RelativeLayout {
 
     private static final String TAG = CourseCardView.class.getSimpleName();
     private final Context mContext;
@@ -52,23 +52,6 @@ public class CourseCardView extends RelativeLayout implements View.OnClickListen
         Picasso.get().load(uri).into(binding.courseImage);
         binding.courseTitle.setText(title);
         binding.courseTeacher.setText(teacher);
-        binding.courseCard.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(getContext(), CourseIntroductionActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putInt("cid", introduction.getCid());
-        bundle.putString("title", introduction.getcName());
-        bundle.putString("cover", introduction.getcImage());
-        bundle.putString("uName", introduction.getcInstructor());
-        bundle.putString("desc", introduction.getcDesc());
-        SharedPreferenceUtils.clear(getContext(), SharedPreferenceUtils.COURSE_FILE);
-        SharedPreferenceUtils.setInteger(getContext(), SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, introduction.getCid());
-        SharedPreferenceUtils.setString(getContext(), SharedPreferenceUtils.COURSE_FILE, "title", introduction.getcName());
-        SharedPreferenceUtils.setString(getContext(), SharedPreferenceUtils.COURSE_FILE, "desc", introduction.getcDesc());
-        intent.putExtra("data", bundle);
-        mContext.startActivity(intent);
-    }
 }

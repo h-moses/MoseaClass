@@ -85,6 +85,8 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.ViewHold
             params.height = 300;
             params.rowSpec = GridLayout.spec(i / 3, 1, 1f);
             params.columnSpec = GridLayout.spec(i % 3, 1, 1f);
+            params.rightMargin = 16;
+            params.leftMargin = 16;
             holder.getBinding().dynamicImageGrid.addView(imageView, params);
         }
     }
