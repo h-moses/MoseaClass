@@ -3,6 +3,7 @@ package com.hyt.moseaclass.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import java.util.List;
 
 public class ShowCourseAdapter extends RecyclerView.Adapter<ShowCourseAdapter.ViewHolder> {
 
+    private static final String TAG = ShowCourseAdapter.class.getSimpleName();
     private final Context mContext;
     private ViewCourseCardBinding binding;
     private List<CourseIntroduction> courseIntroductions = new ArrayList<>();
@@ -37,14 +39,15 @@ public class ShowCourseAdapter extends RecyclerView.Adapter<ShowCourseAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = ViewCourseCardBinding.inflate(LayoutInflater.from(mContext),parent,false);
-
         return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CourseIntroduction courseIntroduction = courseIntroductions.get(position);
-        Picasso.get().load(courseIntroduction.getcImage()).into(holder.getBinding().courseImage);
+        if (!courseIntroduction.getcImage().equals("")) {
+            Picasso.get().load(courseIntroduction.getcImage()).into(holder.getBinding().courseImage);
+        }
         binding.courseTitle.setText(courseIntroduction.getcName());
         binding.courseTeacher.setText(courseIntroduction.getcInstructor());
         binding.getRoot().setOnClickListener(new View.OnClickListener() {

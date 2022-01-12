@@ -23,8 +23,6 @@ public class RunTimeService extends Service {
     private static final String CHANNEL_ID = "1";
     //    通知ID
     private static final int ONGOING_NOTIFICATION_ID = 10;
-    //    消息处理者
-    private final Handler mHandler = new Handler();
     //    声明通知
     private Notification notification;
 

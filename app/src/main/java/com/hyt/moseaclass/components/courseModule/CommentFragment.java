@@ -1,6 +1,7 @@
 package com.hyt.moseaclass.components.courseModule;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class CommentFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e(TAG, "onCreate: 更新数据");
     }
 
     @Nullable

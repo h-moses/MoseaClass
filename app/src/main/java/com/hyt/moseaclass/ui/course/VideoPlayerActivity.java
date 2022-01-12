@@ -43,8 +43,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
         // 设置状态栏覆盖到应用之上，不占固定位置
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        显示返回按钮
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         //        将应用栏与背景色融为一体，去除高程
@@ -81,9 +80,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
         return new DefaultMediaSourceFactory(factory).createMediaSource(MediaItem.fromUri(uri));
     }
 
-    /*
-     * 根据状态栏的展开折叠修改返回按钮的颜色
-     * */
+
     private void setCustomNavigationIcon(int color) {
         Drawable upArrow = ContextCompat.getDrawable(this, androidx.appcompat.R.drawable.abc_ic_ab_back_material);
         if (upArrow != null) {
@@ -121,7 +118,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
     protected void onDestroy() {
         exoPlayer.stop();
         if (exoPlayer != null) {
-            exoPlayer = null;
+            exoPlayer.release();
         }
         super.onDestroy();
     }

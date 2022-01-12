@@ -286,12 +286,6 @@ public class BannerView extends FrameLayout {
         mCurrentIndex = position;
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        mHandler.removeMessages(PLAY);
-    }
-
     /**
      * dp转px
      *

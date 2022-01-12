@@ -18,4 +18,5 @@
     <string name="title_trend">社区</string>
     <string name="channel_name">运行通道</string>
     <string name="channel_description">发送运行通知</string>
+    <string name="evaluate_hint">可以从课程质量、课程形式等方面说说你的感受哦</string>
 </resources>

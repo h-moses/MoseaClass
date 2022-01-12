@@ -1,6 +1,7 @@
 package com.hyt.moseaclass.utils;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -17,11 +18,12 @@ import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class OkHttpUtils {
 
-    public static final MediaType FORM_DATA = MediaType.get("application/x-www-form-urlencoded; charset=utf-8");
+    public static final MediaType JSON = MediaType.parse("application/json");
     private static final String TAG = OkHttpUtils.class.getSimpleName();
     public static JSONArray result;
     public static JSONObject resultObj;
@@ -40,6 +42,42 @@ public class OkHttpUtils {
             }
         }
         return INSTANCE;
+    }
+
+    public static JSONObject postjson(String url, String json) {
+        final CountDownLatch latch = new CountDownLatch(1);
+        RequestBody body = RequestBody.create(JSON,json);
+        Request request = new Request.Builder().url(url).post(body).build();
+        OkHttpUtils.new_instance().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                latch.countDown();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String string = Objects.requireNonNull(response.body()).string();
+                    Log.e(TAG, "onResponse: " + string);
+                    if (!TextUtils.isEmpty(string)) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(string);
+                            resultObj = jsonObject.getJSONObject("data");
+                            Log.e(TAG, "onResponse: " + resultObj.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                latch.countDown();
+            }
+        });
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return resultObj;
     }
 
     public static JSONArray post(String url, FormBody json) {

@@ -2,6 +2,8 @@ package com.hyt.moseaclass.ui.course;
 
 import android.animation.ObjectAnimator;
 import android.animation.StateListAnimator;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -12,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -44,8 +47,6 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
     private int cid;
     private int uid;
 
-    public CourseIntroductionActivity() {
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,6 +105,22 @@ public class CourseIntroductionActivity extends AppCompatActivity implements App
                 }
             }
         });
+
+        if (UserContext.getInstance().getIsLogin(this) && isJoin) {
+            new AlertDialog.Builder(this).setMessage("学了这么久，不如来评价一下这个课程吧~~").setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(getApplicationContext(), CourseEvaluateActivity.class);
+                    intent.putExtra("courseName", introduction.getcName());
+                    startActivity(intent);
+                }
+            }).setNegativeButton("暂不评价", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            }).create().show();
+        }
     }
 
 

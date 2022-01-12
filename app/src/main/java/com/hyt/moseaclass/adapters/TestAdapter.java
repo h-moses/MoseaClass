@@ -77,7 +77,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
             boolean objectNull = jsonObject.isNull("testList");
             List<TestQuestion> questionList = null;
             if (objectNull || jsonObject.getJSONArray("testList").length() == 0) {
-                questionSet = new TestQuestionSet(id, title, new ArrayList<>());
+                continue;
             } else {
                 questionList = new ArrayList<>();
                 JSONArray single = jsonObject.getJSONArray("testList").getJSONObject(0).getJSONArray("singleQuestions");
