@@ -1,7 +1,6 @@
 package com.hyt.moseaclass.utils;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -23,15 +22,21 @@ import okhttp3.Response;
 
 public class OkHttpUtils {
 
+    //    定义json格式
     public static final MediaType JSON = MediaType.parse("application/json");
-    private static final String TAG = OkHttpUtils.class.getSimpleName();
+    //    返回格式类型为数组
     public static JSONArray result;
+    //    返回格式类型为对象
     public static JSONObject resultObj;
+    //    okHttp实例
     private static OkHttpClient INSTANCE;
 
     private OkHttpUtils() {
     }
 
+    /*
+     * 单例模式
+     * */
     public static OkHttpClient new_instance() {
         if (INSTANCE == null) {
             synchronized (OkHttpClient.class) {
@@ -44,10 +49,17 @@ public class OkHttpUtils {
         return INSTANCE;
     }
 
+    /*
+     * 发送json数据，返回对象格式数据
+     * */
     public static JSONObject postjson(String url, String json) {
+//        异步请求转阻塞式同步请求
         final CountDownLatch latch = new CountDownLatch(1);
-        RequestBody body = RequestBody.create(JSON,json);
+//        创建请求body
+        RequestBody body = RequestBody.create(JSON, json);
+//        创建请求
         Request request = new Request.Builder().url(url).post(body).build();
+//        异步执行
         OkHttpUtils.new_instance().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -56,14 +68,14 @@ public class OkHttpUtils {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful()) { // 成功响应
+//                    获取响应
                     String string = Objects.requireNonNull(response.body()).string();
-                    Log.e(TAG, "onResponse: " + string);
                     if (!TextUtils.isEmpty(string)) {
                         try {
+//                            获取数据
                             JSONObject jsonObject = new JSONObject(string);
                             resultObj = jsonObject.getJSONObject("data");
-                            Log.e(TAG, "onResponse: " + resultObj.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -80,6 +92,9 @@ public class OkHttpUtils {
         return resultObj;
     }
 
+    /*
+     * 返回格式为数组
+     * */
     public static JSONArray post(String url, FormBody json) {
 //        异步请求转阻塞式同步请求
         final CountDownLatch latch = new CountDownLatch(1);

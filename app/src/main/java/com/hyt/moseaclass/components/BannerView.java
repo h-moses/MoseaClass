@@ -102,8 +102,11 @@ public class BannerView extends FrameLayout {
             if (position == 0 || mBannerUrlList.isEmpty()) {
                 return;
             }
+//            设置当前滚动位置
             setScrollPosition(position);
+//            获取真实索引
             int smallPos = position % mBannerUrlList.size();
+//            跟随轮播图高亮对应的指示器
             mIndicator.setCurrentPosition(smallPos);
         }
 
@@ -127,11 +130,16 @@ public class BannerView extends FrameLayout {
         init(context, attrs);
     }
 
+    /*
+     * 初始化
+     * */
     public void init(Context context, AttributeSet attrs) {
-        if (mIsMargin) {
+        if (mIsMargin) { // 启动边距模式
             setClipChildren(false);
         }
+//        初始化ViewPager
         initBannerViewPager(context, attrs);
+//        初始化指示器
         initIndicatorView(context);
     }
 
@@ -230,14 +238,18 @@ public class BannerView extends FrameLayout {
      *
      * @param delayMillis
      */
-    public void startPlay(long delayMillis) {
+    public void startPlay(long delayMillis) { // 开始滚动
         isPlay = true;
         mDelayTime = delayMillis;
         play();
     }
 
+    /*
+     * 变更滚动位置
+     * */
     private void play() {
         mCurrentIndex++;
+//        延迟发送空消息，实现自动滚动
         mHandler.sendEmptyMessageDelayed(PLAY, mDelayTime);
     }
 
@@ -305,6 +317,9 @@ public class BannerView extends FrameLayout {
         public InnerPagerAdapter() {
         }
 
+        /*
+         * 可无限滚动
+         * */
         @Override
         public int getCount() {
             return Integer.MAX_VALUE;
@@ -319,11 +334,13 @@ public class BannerView extends FrameLayout {
         @Override
         public Object instantiateItem(@NotNull ViewGroup container, int position) {
             CardView cardView = new CardView(getContext());
+//            以卡片视图为父组件
             cardView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             cardView.setCardElevation(5);
             cardView.setRadius(mBannerRadius);
-
+//子组件采用圆角图片视图
             RoundImageView bannerIv = new RoundImageView(getContext());
+//            设置缩放类型
             bannerIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             bannerIv.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             int size = mBannerUrlList.size();

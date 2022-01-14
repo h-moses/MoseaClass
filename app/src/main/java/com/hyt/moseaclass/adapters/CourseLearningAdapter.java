@@ -21,8 +21,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * 已学习课程的适配器
+ * */
 public class CourseLearningAdapter extends RecyclerView.Adapter<CourseLearningAdapter.ViewHolder> {
-    private static final String TAG = CourseLearningAdapter.class.getSimpleName();
+
     private final Context mContext;
     private List<LearningCourse> learningCourseList = new ArrayList<>();
 
@@ -40,13 +43,16 @@ public class CourseLearningAdapter extends RecyclerView.Adapter<CourseLearningAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+//        取出数据并显示在页面上
         Picasso.get().load(Uri.parse(learningCourseList.get(position).getcCover())).into(holder.getBinding().learningCourseImage);
         holder.getBinding().learningCourseName.setText(learningCourseList.get(position).getcName());
         holder.getBinding().learningCourseTeacher.setText(learningCourseList.get(position).getuName());
+//        课程卡片的点击事件
         holder.getBinding().getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
+//                将下列数据设置为共享
                 SharedPreferenceUtils.clear(mContext, SharedPreferenceUtils.COURSE_FILE);
                 SharedPreferenceUtils.setInteger(mContext, SharedPreferenceUtils.COURSE_FILE, "id", learningCourseList.get(position).getId());
                 SharedPreferenceUtils.setInteger(mContext, SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, learningCourseList.get(position).getCid());
@@ -54,6 +60,7 @@ public class CourseLearningAdapter extends RecyclerView.Adapter<CourseLearningAd
                 SharedPreferenceUtils.setInteger(mContext, SharedPreferenceUtils.COURSE_FILE, "order_id", learningCourseList.get(position).getOrderId());
                 SharedPreferenceUtils.setString(mContext, SharedPreferenceUtils.COURSE_FILE, "title", learningCourseList.get(position).getcName());
                 SharedPreferenceUtils.setString(mContext, SharedPreferenceUtils.COURSE_FILE, "desc", learningCourseList.get(position).getcDesc());
+//                intent携带下列数据
                 bundle.putInt("cid", learningCourseList.get(position).getCid());
                 bundle.putString("title", learningCourseList.get(position).getcName());
                 bundle.putString("cover", learningCourseList.get(position).getcCover());

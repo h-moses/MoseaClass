@@ -12,11 +12,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.hyt.moseaclass.R;
 import com.hyt.moseaclass.ui.home.TabPageFragment;
 
+/*
+ * 标签适配器
+ * */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_recommend, R.string.tab_cs, R.string.tab_national_excellent, R.string.tab_postgraduate_exam, R.string.tab_foreign_languages, R.string.tab_psychology, R.string.tab_final_exam};
-    private static final String TAG = SectionsPagerAdapter.class.getSimpleName();
     private final Context mContext;
 
     public SectionsPagerAdapter(Context mContext, FragmentManager manager, int behavior) {

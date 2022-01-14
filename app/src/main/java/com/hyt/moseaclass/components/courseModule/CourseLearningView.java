@@ -14,7 +14,6 @@ public class CourseLearningView extends ConstraintLayout {
 
 
     private final Context mContext;
-    private ViewCourseLearningBinding binding;
 
     public CourseLearningView(@NonNull Context context) {
         super(context);
@@ -24,7 +23,7 @@ public class CourseLearningView extends ConstraintLayout {
     public CourseLearningView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mContext = null;
-        binding = ViewCourseLearningBinding.inflate(LayoutInflater.from(mContext), this, true);
+        ViewCourseLearningBinding.inflate(LayoutInflater.from(mContext), this, true);
     }
 
     public CourseLearningView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

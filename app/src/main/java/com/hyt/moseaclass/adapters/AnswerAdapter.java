@@ -19,21 +19,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/*
+ * 答题适配器
+ * */
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder> {
-    
-//    答案和选项索引对应字典
+
+    //    答案和选项索引对应字典
     private final Map<String, Integer> singleMap = new HashMap<>();
     private final Map<String, Integer> judgeMap = new HashMap<>();
 
     private final Context mContext;
-//    题目数组
+    //    题目数组
     private List<TestQuestion> questionList = new ArrayList<>();
-//    获得总分
+    //    获得总分
     private int totalScore = 0;
 
     public AnswerAdapter(Context mContext, List<TestQuestion> questions) {
         this.mContext = mContext;
         this.questionList = questions;
+//        将答案转换为索引
         singleMap.put("A", 0);
         singleMap.put("B", 1);
         singleMap.put("C", 2);
@@ -61,11 +65,12 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
             holder.getBinding().optionsGroup.addView(radioButton);
         }
 
+//        单选组的选中变化事件
         holder.getBinding().optionsGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (radioGroup.getChildCount() == 2) { // 该题为判断题，只有两个选项
-                    if (i == radioGroup.getChildAt(judgeMap.get(questionList.get(position).getAnswer())).getId()) {
+                    if (i == radioGroup.getChildAt(judgeMap.get(questionList.get(position).getAnswer())).getId()) { // 答案匹配,则添加分数
                         totalScore += questionList.get(position).getScore();
                     }
                 } else if (radioGroup.getChildCount() == 4) { // 该题为单选题，四个选项
@@ -82,7 +87,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
         return questionList.size();
     }
 
-//    返回总分数
+    //    返回总分数
     public int calcScore() {
         return totalScore;
     }

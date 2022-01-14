@@ -12,6 +12,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class UserInfoRepository {
 
+    //    Dao层实例
     private final UserInfoDao userInfoDao;
     private LiveData<UserInfo> userInfoLiveData;
     private LiveData<Integer> loginState;
@@ -22,15 +23,11 @@ public class UserInfoRepository {
         this.userInfoDao = database.userInfoDao();
     }
 
+    /*
+     * 增加用户数据
+     * */
     public void insertUser(UserInfo userInfo) {
         AppDatabase.databaseWriteExecutor.execute(() -> this.userInfoDao.insert(userInfo));
-    }
-
-    public LiveData<Integer> queryLoginState(Integer uid) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            loginState = this.userInfoDao.queryLogin(uid);
-        });
-        return loginState;
     }
 
     /*

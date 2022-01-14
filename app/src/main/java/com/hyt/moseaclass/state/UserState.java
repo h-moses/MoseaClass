@@ -8,5 +8,4 @@ public interface UserState {
 
     void joinCourse(Context context, int uid, int cid);
 
-    void quitCourse(Context context, int uid, int cid);
 }

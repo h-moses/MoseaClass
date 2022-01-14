@@ -9,8 +9,11 @@ import java.util.List;
 
 public abstract class BaseIndicator extends LinearLayout implements Indicator {
 
+    //    圆点个数
     private int mCellCount;
+    //    当前高亮位置
     private int mCurrentPos;
+    //    圆点列表
     private List<IndicatorCell> mCellViews;
 
     public BaseIndicator(Context context) {
@@ -22,6 +25,9 @@ public abstract class BaseIndicator extends LinearLayout implements Indicator {
         mCellViews = new ArrayList<>();
     }
 
+    /*
+     * 设置圆点个数,并初始化圆点
+     * */
     @Override
     public void setCellCount(int cellCount) {
         mCellCount = cellCount;
@@ -34,6 +40,9 @@ public abstract class BaseIndicator extends LinearLayout implements Indicator {
         }
     }
 
+    /*
+     * 设置当前高亮位置
+     * */
     @Override
     public void setCurrentPosition(int currentPosition) {
         mCurrentPos = currentPosition;
@@ -53,6 +62,9 @@ public abstract class BaseIndicator extends LinearLayout implements Indicator {
      */
     protected abstract float getCellMargin();
 
+    /*
+     * 测量指示器的宽高
+     * */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -64,6 +76,9 @@ public abstract class BaseIndicator extends LinearLayout implements Indicator {
         setMeasuredDimension((int) width, (int) height);
     }
 
+    /*
+     * 测量位置
+     * */
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);

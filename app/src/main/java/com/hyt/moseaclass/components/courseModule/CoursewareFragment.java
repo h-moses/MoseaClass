@@ -178,7 +178,7 @@ public class CoursewareFragment extends Fragment {
                             intent.putExtra("video_url", sectionList.get(groupPosition).get(childPosition).getsUrl());
                             context.startActivity(intent);
                         } else {
-                            Toast.makeText(view.getContext(),"用户尚未登录，无法观看视频",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(view.getContext(), "用户尚未登录，无法观看视频", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

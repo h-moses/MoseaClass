@@ -7,9 +7,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Handler;
 import android.os.IBinder;
-import android.widget.RemoteViews;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -29,6 +27,7 @@ public class RunTimeService extends Service {
     public RunTimeService() {
         super();
     }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -44,36 +43,41 @@ public class RunTimeService extends Service {
         return START_STICKY;
     }
 
+    /*
+     * 创建通知渠道
+     * */
     private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
+//            向系统注册信道
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
 
 
+    /*
+     * 显示通知
+     * */
     private void showNotification() {
+//        通知可以点击前往应用首页
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_logo)
-                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                .setContentTitle("山海课堂正在运行中")
-                .setContentText("点击进入APP")
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setSmallIcon(R.drawable.ic_logo)  // 小logo
+                .setStyle(new NotificationCompat.DecoratedCustomViewStyle()) // 默认样式
+                .setContentTitle("山海课堂正在运行中") // 内容标题
+                .setContentText("点击进入APP") //内容文字
+                .setPriority(NotificationCompat.PRIORITY_HIGH) // 优先级
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
         notification = builder.build();
+//        启动通知
         startForeground(ONGOING_NOTIFICATION_ID, notification);
     }
 

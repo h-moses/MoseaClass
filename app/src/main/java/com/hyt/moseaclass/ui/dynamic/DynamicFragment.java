@@ -15,13 +15,13 @@ import com.hyt.moseaclass.databinding.FragmentDynamicBinding;
 
 public class DynamicFragment extends Fragment {
 
-    private FragmentDynamicBinding binding;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentDynamicBinding.inflate(inflater, container, false);
+        com.hyt.moseaclass.databinding.FragmentDynamicBinding binding = FragmentDynamicBinding.inflate(inflater, container, false);
+//        动态列表设置为线性布局
         binding.dynamicList.setLayoutManager(new LinearLayoutManager(requireContext()));
+//        动态列表设置适配器
         binding.dynamicList.setAdapter(new DynamicAdapter(requireContext()));
         return binding.getRoot();
     }

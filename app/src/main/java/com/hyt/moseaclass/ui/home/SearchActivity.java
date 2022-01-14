@@ -25,35 +25,43 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import okhttp3.FormBody;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private static final String TITLE_TEMPLATE = "共有%d条与%s相关的内容";
+    //    搜索结果
     private final List<SearchResult> resultList = new ArrayList<>();
+    //    查询
     private String query;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        处理Intent
         handleIntent();
 
         com.hyt.moseaclass.databinding.ActivitySearchBinding binding = ActivitySearchBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
+//        初始化搜索框
         initSearchView(binding.searchSearchView);
 
         binding.resultList.setLayoutManager(new LinearLayoutManager(this));
-        binding.resultList.setAdapter(new SearchAdapter(this,resultList));
+        binding.resultList.setAdapter(new SearchAdapter(this, resultList));
     }
 
 
+    /*
+     * 初始化搜索框
+     * */
     private void initSearchView(SearchView searchView) {
-        searchView.setQuery(query,false);
+//        传入用户输入的数据
+        searchView.setQuery(query, false);
+//        自动聚焦
         searchView.setFocusable(true);
+//        不以图标显示
         searchView.setIconifiedByDefault(false);
         searchView.setQueryRefinementEnabled(true);
 //        去除下划线
@@ -64,13 +72,14 @@ public class SearchActivity extends AppCompatActivity {
         textView.setHintTextColor(Color.rgb(153, 153, 153));
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
+//        配置搜索框
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //                执行搜索，设置intent的搜索活动，添加搜索信息
+//                执行搜索，设置intent的搜索活动，添加搜索信息
                 doSearch(query);
                 return true;
             }
@@ -84,8 +93,8 @@ public class SearchActivity extends AppCompatActivity {
 
 
     /*
-    * 获取搜索关键词，进行搜索
-    * */
+     * 获取搜索关键词，进行搜索
+     * */
     private void handleIntent() {
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -96,8 +105,8 @@ public class SearchActivity extends AppCompatActivity {
 
 
     /*
-    * 网络请求，根据关键字模糊搜索
-    * */
+     * 网络请求，根据关键字模糊搜索
+     * */
     private void doSearch(String query) {
         FormBody.Builder builder = new FormBody.Builder();
         builder.add("key", query);
@@ -115,6 +124,5 @@ public class SearchActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
     }
 }

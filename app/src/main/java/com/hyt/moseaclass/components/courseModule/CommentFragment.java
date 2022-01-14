@@ -1,7 +1,6 @@
 package com.hyt.moseaclass.components.courseModule;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +28,6 @@ import okhttp3.FormBody;
 
 public class CommentFragment extends Fragment {
 
-    private static final String TAG = CommentFragment.class.getSimpleName();
-    private FragmentCommentBinding binding;
     private List<CourseComment> commentList;
 
     @Override
@@ -41,22 +38,25 @@ public class CommentFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "onCreate: 更新数据");
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentCommentBinding.inflate(inflater, container, false);
+        com.hyt.moseaclass.databinding.FragmentCommentBinding binding = FragmentCommentBinding.inflate(inflater, container, false);
         binding.commentRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.commentRecyclerView.setAdapter(new CommentAdapter(getContext(), commentList));
         return binding.getRoot();
     }
 
 
+    /*
+     * 网络请求获取评价数据
+     * */
     private void initData() throws JSONException {
         commentList = new ArrayList<>();
         FormBody.Builder builder = new FormBody.Builder();
+//        传入课程id
         builder.add("cid", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(), SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, Integer.MIN_VALUE)));
         JSONArray array = OkHttpUtils.post("http://101.133.173.40:8090/edusys/course/getCourseEvaluation?", builder.build());
         for (int i = 0; i < array.length(); i++) {

@@ -15,11 +15,16 @@ import com.hyt.moseaclass.components.courseModule.CoursewareFragment;
 import com.hyt.moseaclass.components.courseModule.IntroductionFragment;
 import com.hyt.moseaclass.components.courseModule.TestFragment;
 
+/*
+ * 课程四大模块适配器
+ * */
 public class CourseRelativityPagerAdapter extends FragmentPagerAdapter {
 
+    /*
+     * 课程四个模块
+     * */
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_introduction, R.string.tab_courseware, R.string.tab_comment, R.string.tab_test};
-    private static final String TAG = CourseRelativityPagerAdapter.class.getSimpleName();
 
     private final Context mContext;
 

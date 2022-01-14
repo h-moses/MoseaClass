@@ -30,6 +30,7 @@ import java.util.Objects;
 public class VideoPlayerActivity extends AppCompatActivity {
 
 
+    //    声明播放器
     private ExoPlayer exoPlayer;
 
     private ActivityVideoPlayerBinding binding;
@@ -39,14 +40,15 @@ public class VideoPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityVideoPlayerBinding.inflate(LayoutInflater.from(this), null, false);
         setContentView(binding.getRoot());
+//        设置应用栏
         setSupportActionBar(binding.videoToolbar);
-        // 设置状态栏覆盖到应用之上，不占固定位置
+//        设置状态栏覆盖到应用之上，不占固定位置
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        显示返回按钮
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        //        将应用栏与背景色融为一体，去除高程
+//        将应用栏与背景色融为一体，去除高程
         StateListAnimator stateListAnimator = new StateListAnimator();
         stateListAnimator.addState(new int[0], ObjectAnimator.ofFloat(binding.videoAppbar, "elevation", 0.1f));
         binding.videoAppbar.setStateListAnimator(stateListAnimator);
@@ -54,6 +56,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
     }
 
     private void init() {
+//        修改返回按钮颜色
         setCustomNavigationIcon(R.color.black);
         initPlayer();
     }
@@ -81,6 +84,9 @@ public class VideoPlayerActivity extends AppCompatActivity {
     }
 
 
+    /*
+     * 将返回按钮修改为参数颜色
+     * */
     private void setCustomNavigationIcon(int color) {
         Drawable upArrow = ContextCompat.getDrawable(this, androidx.appcompat.R.drawable.abc_ic_ab_back_material);
         if (upArrow != null) {

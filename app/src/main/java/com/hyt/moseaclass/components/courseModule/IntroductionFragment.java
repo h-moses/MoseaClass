@@ -14,12 +14,10 @@ import com.hyt.moseaclass.utils.SharedPreferenceUtils;
 
 public class IntroductionFragment extends Fragment {
 
-    private FragmentIntroductionBinding binding;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentIntroductionBinding.inflate(inflater, container, false);
+        com.hyt.moseaclass.databinding.FragmentIntroductionBinding binding = FragmentIntroductionBinding.inflate(inflater, container, false);
         binding.tvIntroductionName.setText(SharedPreferenceUtils.getString(requireContext(), SharedPreferenceUtils.COURSE_FILE, "title", ""));
         binding.tvIntroductionDesc.setText(SharedPreferenceUtils.getString(requireContext(), SharedPreferenceUtils.COURSE_FILE, "desc", ""));
         return binding.getRoot();

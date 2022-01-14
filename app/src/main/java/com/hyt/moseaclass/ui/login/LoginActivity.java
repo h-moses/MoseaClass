@@ -3,7 +3,6 @@ package com.hyt.moseaclass.ui.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -33,34 +32,41 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(LayoutInflater.from(getApplicationContext()));
         setContentView(binding.getRoot());
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(UserInfoViewModel.class);
-        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    userLogin(binding.etUsername.getText().toString(), binding.etPassword.getText().toString(), "1");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
+//        登录按钮的点击事件
+        binding.btnLogin.setOnClickListener(v -> {
+            try {
+                userLogin(binding.etUsername.getText().toString(), binding.etPassword.getText().toString(), "1");
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         });
-        if (UserContext.getInstance().getIsLogin(this)) {
+        if (UserContext.getInstance().getIsLogin(this)) { // 用户已登录，直接跳转到首页
             goMainActivity();
         }
     }
 
+    /*
+     * 用户登录时的数据处理
+     * */
     private void userLogin(String phone, String pwd, String role) throws JSONException {
+//        将用户输入的数据添加到form-data中
         FormBody.Builder builder = new FormBody.Builder();
         builder.add("phone", phone);
         builder.add("pwd", pwd);
         builder.add("role", role);
+//        发送请求
         JSONObject jsonObject = OkHttpUtils.postObj("http://101.133.173.40:8090/edusys/user/login", builder.build());
-        if (jsonObject != null) {
+        if (jsonObject != null) { // 若不为空，则用户输入正确
+//             存储下列信息
             int uid = jsonObject.getInt("uid");
             String nick_name = jsonObject.getString("nick_name");
             String phone1 = jsonObject.getString("phone");
             String avatar = jsonObject.getString("avatar");
             UserInfo userInfo = new UserInfo(uid, nick_name, phone1, avatar);
+//
             userInfo.setIsLogin(1);
+//            将用户信息插入数据库
             viewModel.getUserInfoRepository().insertUser(userInfo);
 //            设置登录状态
             UserContext.getInstance().setLoginState(this, uid);
@@ -71,6 +77,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * 跳转至登录界面
+     * */
     private void goMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

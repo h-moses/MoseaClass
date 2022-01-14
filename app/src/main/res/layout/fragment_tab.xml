@@ -31,9 +31,9 @@
                 android:id="@+id/course_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
                 android:background="@color/white"
-                android:paddingVertical="@dimen/dp_16"
-                android:layout_marginHorizontal="@dimen/dp_16" />
+                android:paddingVertical="@dimen/dp_16" />
 
         </LinearLayout>
 

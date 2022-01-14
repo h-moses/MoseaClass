@@ -1,7 +1,6 @@
 package com.hyt.moseaclass.ui.course;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +29,12 @@ import okhttp3.FormBody;
 
 public class CourseFragment extends Fragment {
 
+    //    动态字符串模板，参加课程的数量
     private static final String COURSE_COUNT_TEMPLATE = "课程(%d)";
-    private static final String TAG = CourseFragment.class.getSimpleName();
 
     private FragmentCourseBinding binding;
 
+    //    已参加课程列表
     private List<LearningCourse> learningCourseList;
 
     @Override
@@ -58,13 +58,15 @@ public class CourseFragment extends Fragment {
     }
 
 
+    /*
+     * 网络请求数据
+     * */
     private void initData() throws JSONException {
         learningCourseList = new ArrayList<>();
         LearningCourse learningCourse = null;
         FormBody.Builder builder = new FormBody.Builder();
         builder.add("uid", String.valueOf(SharedPreferenceUtils.getInteger(requireContext(), SharedPreferenceUtils.LOGIN_STATE, UserContext.KEY_UID, Integer.MIN_VALUE)));
         JSONArray array = OkHttpUtils.post("http://101.133.173.40:8090/edusys/course/getLearntCourse?", builder.build());
-        Log.e(TAG, "initData: " + array.length());
         for (int i = 0; i < array.length(); i++) {
             JSONObject jsonObject = array.getJSONObject(i);
             int id = jsonObject.getInt("id");

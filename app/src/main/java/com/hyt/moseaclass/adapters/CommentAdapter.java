@@ -15,6 +15,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * 评价的适配器
+ * */
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
     private final Context mContext;
@@ -36,7 +39,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+//        取出对应位置的数据并显示在页面
         Picasso.get().load(Uri.parse(commentList.get(position).getuAvatar())).into(binding.rivUserAvatar);
         binding.tvUserName.setText(commentList.get(position).getuName());
         binding.tvCommentDate.setText("2021-12-22");

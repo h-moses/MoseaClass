@@ -21,9 +21,11 @@ import com.hyt.moseaclass.databinding.ActivityAnswerBinding;
 import java.util.List;
 import java.util.Objects;
 
+/*
+ * 答题页面
+ * */
 public class AnswerActivity extends AppCompatActivity {
 
-    private static final String TAG = AnswerActivity.class.getSimpleName();
     private List<TestQuestion> questionList;
 
     @Override
@@ -33,13 +35,18 @@ public class AnswerActivity extends AppCompatActivity {
         ActivityAnswerBinding binding = ActivityAnswerBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
+//        设置应用栏
         setSupportActionBar(binding.answerToolbar);
+//        显示标题
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
+//        显示返回按钮
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+//        处理intent
         handleIntent();
+//        修改返回按钮颜色
         setCustomNavigationIcon(R.color.white);
 
+//        设置适配器
         AnswerAdapter answerAdapter = new AnswerAdapter(this, questionList);
         binding.answerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.answerRecyclerView.setAdapter(answerAdapter);

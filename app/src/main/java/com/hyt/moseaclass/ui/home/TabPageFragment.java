@@ -1,11 +1,8 @@
 package com.hyt.moseaclass.ui.home;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,9 +28,11 @@ import okhttp3.FormBody;
 
 public class TabPageFragment extends Fragment {
 
-    private static final String TAG = TabPageFragment.class.getSimpleName();
+    //    轮播图资源
     private final List<String> bannerImages = new ArrayList<>();
+    //    课程信息
     private final List<CourseIntroduction> courseIntroductions = new ArrayList<>();
+    //    上下文信息
     private final Context mContext;
     private FragmentTabBinding binding;
     private String tabTitle;
@@ -47,6 +46,7 @@ public class TabPageFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        初始化数据
         try {
             initData();
         } catch (JSONException e) {
@@ -60,12 +60,18 @@ public class TabPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentTabBinding.inflate(inflater, container, false);
         bannerView = binding.advertisingBanner;
+//        设置图片资源
         bannerView.setBannerData(bannerImages);
-        binding.courseList.setLayoutManager(new GridLayoutManager(requireContext(),2,GridLayoutManager.VERTICAL,false));
-        binding.courseList.setAdapter(new ShowCourseAdapter(requireContext(),courseIntroductions));
+//        设置布局
+        binding.courseList.setLayoutManager(new GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false));
+//        设置适配器，传入数据
+        binding.courseList.setAdapter(new ShowCourseAdapter(requireContext(), courseIntroductions));
         return binding.getRoot();
     }
 
+    /*
+     * 网络请求获取数据
+     * */
     private void initData() throws JSONException {
         FormBody.Builder formBody = new FormBody.Builder();
         formBody.add("type", "stu_home");

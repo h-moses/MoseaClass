@@ -9,30 +9,24 @@ import androidx.lifecycle.LiveData;
 import com.hyt.moseaclass.data.entity.UserInfo;
 import com.hyt.moseaclass.data.repository.UserInfoRepository;
 
+/*
+ * 用户信息视图模型
+ * */
 public class UserInfoViewModel extends AndroidViewModel {
 
-    private static final String TAG = UserInfoViewModel.class.getSimpleName();
     private final UserInfoRepository userInfoRepository;
-    private LiveData<UserInfo> userInfo;
-    private LiveData<Integer> loginState;
 
     public UserInfoViewModel(@NonNull Application application) {
         super(application);
         this.userInfoRepository = new UserInfoRepository(application);
     }
 
+    /*
+     * 查询用户信息
+     * */
     public LiveData<UserInfo> getUserInfoLiveData(Integer uid) {
-        this.userInfo = userInfoRepository.queryUserInfo(uid);
+        LiveData<UserInfo> userInfo = userInfoRepository.queryUserInfo(uid);
         return userInfo;
-    }
-
-    public LiveData<Integer> getLoginState(Integer uid) {
-        this.loginState = userInfoRepository.queryLoginState(uid);
-        return loginState;
-    }
-
-    public void insertUserInfo(UserInfo userInfo) {
-        userInfoRepository.insertUser(userInfo);
     }
 
     public UserInfoRepository getUserInfoRepository() {

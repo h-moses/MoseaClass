@@ -33,23 +33,26 @@ import java.util.Map;
 
 import okhttp3.FormBody;
 
+/*
+ * 测验卡片适配器
+ * */
 public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
 
-//    总分模板
+    //    总分模板
     private static final String SCORE_TEMPLATE = "总分%d";
-//    标题模板
+    //    标题模板
     private static final String TITLE_TEMPLATE = "第%s章测验";
-//    时间模板
+    //    时间模板
     private static final String DEADLINE_TEMPLATE = "提交截止 2022-02-27 23:00";
     private static final String TAG = TestAdapter.class.getSimpleName();
 
 
     private final Context mContext;
-//    所有章节的总分数组
+    //    所有章节的总分数组
     private final List<Integer> scoreList = new ArrayList<>();
-//    所有章节的信息和题目实体数组
+    //    所有章节的信息和题目实体数组
     private final List<TestQuestionSet> questions = new ArrayList<>();
-//    章节匹配字典
+    //    章节匹配字典
     private final Map<Integer, String> numberMap = new HashMap<>();
 
     public TestAdapter(Context mContext) {
@@ -62,8 +65,8 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
     }
 
     /*
-    * 异步请求获取数据，并解析数据
-    * */
+     * 异步请求获取数据，并解析数据
+     * */
     private void initData() throws JSONException {
         FormBody.Builder builder = new FormBody.Builder();
         builder.add("id", String.valueOf(SharedPreferenceUtils.getInteger(mContext, SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_CID, Integer.MIN_VALUE)));
@@ -76,12 +79,13 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
             String title = jsonObject.getString("title");
             boolean objectNull = jsonObject.isNull("testList");
             List<TestQuestion> questionList = null;
-            if (objectNull || jsonObject.getJSONArray("testList").length() == 0) {
+            if (objectNull || jsonObject.getJSONArray("testList").length() == 0) { // 若该章节下没有测试题目，直接略过
                 continue;
             } else {
                 questionList = new ArrayList<>();
                 JSONArray single = jsonObject.getJSONArray("testList").getJSONObject(0).getJSONArray("singleQuestions");
                 JSONArray judge = jsonObject.getJSONArray("testList").getJSONObject(0).getJSONArray("judgeQuestions");
+//                循环取出单选题所需的信息
                 for (int j = 0; j < single.length(); j++) {
                     TestQuestion testQuestion;
                     JSONObject object = single.getJSONObject(j);
@@ -92,6 +96,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
                     String question = object.getJSONObject("questionSingle").getString("question");
                     String answer = object.getJSONObject("questionSingle").getString("answer");
                     List<String> options = new ArrayList<>();
+//                    添加单选项
                     options.add(object.getJSONObject("questionSingle").getString("optionA"));
                     options.add(object.getJSONObject("questionSingle").getString("optionB"));
                     options.add(object.getJSONObject("questionSingle").getString("optionC"));
@@ -99,6 +104,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
                     testQuestion = new TestQuestion(id1, score, question_type, question, answer, options);
                     questionList.add(testQuestion);
                 }
+//                取出判断题所需的信息
                 for (int j = 0; j < judge.length(); j++) {
                     TestQuestion testQuestion;
                     JSONObject object = judge.getJSONObject(j);
@@ -109,6 +115,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
                     String question = object.getJSONObject("questionJudge").getString("question");
                     String answer = object.getJSONObject("questionJudge").getString("answer");
                     List<String> options = new ArrayList<>();
+//                    添加判断选项
                     options.add("正确");
                     options.add("错误");
                     testQuestion = new TestQuestion(id1, score, question_type, question, answer, options);
@@ -145,7 +152,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 if (UserContext.getInstance().getIsLogin(view.getContext())) { // 若用户已登录
-                    if (SharedPreferenceUtils.getBoolean(view.getContext(),SharedPreferenceUtils.COURSE_FILE,UserContext.KEY_JOIN,false)) { // 若用户已参与该课程
+                    if (SharedPreferenceUtils.getBoolean(view.getContext(), SharedPreferenceUtils.COURSE_FILE, UserContext.KEY_JOIN, false)) { // 若用户已参与该课程
 //                        显示确认对话框，是否进入答题界面
                         new AlertDialog.Builder(view.getContext()).setMessage("确认要进入答题？").setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             @Override
@@ -161,10 +168,10 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
                             }
                         }).create().show();
                     } else { // 若用户没有参与课程
-                        Toast.makeText(view.getContext(),"用户未加入该课程，无法进入测验！",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), "用户未加入该课程，无法进入测验！", Toast.LENGTH_SHORT).show();
                     }
                 } else { // 若用户没有登录
-                    Toast.makeText(view.getContext(),"用户未登录，无法进入测验！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "用户未登录，无法进入测验！", Toast.LENGTH_SHORT).show();
                 }
             }
         });

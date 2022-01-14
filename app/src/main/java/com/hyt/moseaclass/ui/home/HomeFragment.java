@@ -20,7 +20,6 @@ import com.hyt.moseaclass.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    private static final String TAG = HomeFragment.class.getSimpleName();
     private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -33,8 +32,13 @@ public class HomeFragment extends Fragment {
         return binding.getRoot();
     }
 
+    /*
+     * 初始化搜索框
+     * */
     private void initSearchView(SearchView searchView) {
+//        提示查询
         searchView.setQueryHint("Vue");
+//        默认不以图表显示
         searchView.setIconifiedByDefault(false);
         searchView.setQueryRefinementEnabled(true);
 //        去除下划线
@@ -45,16 +49,21 @@ public class HomeFragment extends Fragment {
         textView.setHintTextColor(Color.rgb(153, 153, 153));
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
+//        获取SearchView并设置可搜索的配置
         SearchManager searchManager = (SearchManager) requireContext().getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().getComponentName()));
 
+//        添加监听器
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //                执行搜索，设置intent的搜索活动，添加搜索信息
+//                执行搜索，设置intent的搜索活动，添加搜索信息
                 Intent intent = new Intent(requireActivity(), SearchActivity.class);
-                intent.putExtra(SearchManager.QUERY,query);
+//                携带查询数据
+                intent.putExtra(SearchManager.QUERY, query);
+//                设置ACTION_SEARCH
                 intent.setAction(Intent.ACTION_SEARCH);
+//                启动Activity
                 startActivity(intent);
                 return true;
             }
@@ -66,10 +75,14 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    /*
+     * 初始化标签布局
+     * */
     private void initTabLayout() {
+//        设置适配器
         binding.viewPager.setAdapter(new SectionsPagerAdapter(getContext(), getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
-//        解决tab切换时的轮播图报错
-        binding.viewPager.setOffscreenPageLimit(1);
+        binding.viewPager.setOffscreenPageLimit(7);
+//        给布局设置viewpager，实现页面切换
         binding.homeTabs.setupWithViewPager(binding.viewPager);
     }
 }

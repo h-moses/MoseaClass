@@ -12,12 +12,17 @@ import com.hyt.moseaclass.data.entity.UserInfo;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+// 传入对应的实体
 @Database(entities = {UserInfo.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
+    //    线程数
     private static final int NUMBER_OF_THREAD = 2;
+    //    线程池
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREAD);
+    //    实例
     private static volatile AppDatabase INSTANCE;
 
+    //    单例模式
     public static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {

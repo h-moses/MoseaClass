@@ -21,12 +21,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * 动态适配器
+ * */
 public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.ViewHolder> {
 
-    private static final String TAG = DynamicAdapter.class.getSimpleName();
     private final Context mContext;
     private final List<DynamicInfo> dynamicInfoList = new ArrayList<>();
-    private ItemDynamicBinding binding;
 
     public DynamicAdapter(Context mContext) {
         this.mContext = mContext;
@@ -37,6 +38,9 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.ViewHold
         }
     }
 
+    /*
+     * 获取动态数据
+     * */
     private void initData() throws JSONException {
         JSONArray jsonArray = OkHttpUtils.get("http://101.133.173.40:8090/edusys/find/getAllShare");
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -63,7 +67,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemDynamicBinding.inflate(LayoutInflater.from(mContext), parent, false);
+        com.hyt.moseaclass.databinding.ItemDynamicBinding binding = ItemDynamicBinding.inflate(LayoutInflater.from(mContext), parent, false);
         return new ViewHolder(binding);
     }
 
@@ -75,7 +79,9 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.ViewHold
         holder.getBinding().dynamicTime.setText(dynamicInfoList.get(position).getPublishTime());
         holder.getBinding().dynamicContent.setText(dynamicInfoList.get(position).getContent());
         List<String> imgList = dynamicInfoList.get(position).getImgList();
+//        设置网格布局的列数
         holder.getBinding().dynamicImageGrid.setColumnCount(Math.min(imgList.size(), 3));
+//        设置网格布局的行数
         holder.getBinding().dynamicImageGrid.setRowCount((int) Math.ceil(imgList.size() / 3.0));
         for (int i = 0; i < imgList.size(); i++) {
             ImageView imageView = new ImageView(mContext);

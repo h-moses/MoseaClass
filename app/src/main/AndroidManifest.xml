@@ -21,7 +21,11 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoseaClass">
-        <service android:name=".service.RunTimeService" android:enabled="true" android:exported="false" />
+        <service
+            android:name=".service.RunTimeService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,8 +50,8 @@
         </activity>
         <activity
             android:name=".ui.course.VideoPlayerActivity"
-            android:parentActivityName=".MainActivity"
-            android:configChanges="orientation"/>
+            android:configChanges="orientation"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ui.course.AnswerActivity"
             android:parentActivityName=".MainActivity"
@@ -57,7 +61,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable" />
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
     </application>
 

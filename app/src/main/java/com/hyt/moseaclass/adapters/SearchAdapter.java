@@ -2,7 +2,6 @@ package com.hyt.moseaclass.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -15,11 +14,19 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * 搜索适配器
+ * */
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
+    //    上下文信息
     private final Context mContext;
+    //    数据列表
     private final List<SearchResult> resultList = new ArrayList<>();
 
+    /*
+     * 构造器，获取上下文和数据
+     * */
     public SearchAdapter(Context context, List<SearchResult> list) {
         this.mContext = context;
         this.resultList.clear();
@@ -29,12 +36,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemSearchCourseBinding binding = ItemSearchCourseBinding.inflate(LayoutInflater.from(mContext),parent,false);
+//        使用视图绑定
+        ItemSearchCourseBinding binding = ItemSearchCourseBinding.inflate(LayoutInflater.from(mContext), parent, false);
+//        创建ViewHolder
         return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+//        获取对应索引的课程并显示信息
         Picasso.get().load(resultList.get(position).getcCover()).into(holder.getBinding().itemCover);
         holder.getBinding().itemTitle.setText(resultList.get(position).getcName());
         holder.getBinding().itemDesc.setText(resultList.get(position).getcDesc());

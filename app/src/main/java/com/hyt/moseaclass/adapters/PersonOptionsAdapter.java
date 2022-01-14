@@ -15,9 +15,11 @@ import com.squareup.picasso.Picasso;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+ * 选项适配器
+ * */
 public class PersonOptionsAdapter extends RecyclerView.Adapter<PersonOptionsAdapter.ViewHolder> {
 
-    private static final String TAG = PersonOptionsAdapter.class.getSimpleName();
     private final Context mContext;
     private final List<String> nameList = Arrays.asList("我的课程", "我的讨论");
     @DrawableRes
